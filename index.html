@@ -259,6 +259,40 @@
                 opacity: 1 !important; 
                 transform: none !important; 
             }
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero-title { 
+                font-size: 3rem; 
+                line-height: 1.1; 
+                letter-spacing: -0.05em;
+            }
+            .section { 
+                padding: 60px 24px; 
+            }
+            .section-header h2 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+            .bento-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            .project-card {
+                padding: 20px;
+                border-radius: 20px;
+            }
+            .project-img {
+                height: 180px;
+            }
+            /* Mobile-specific text contrast boost */
+            :root {
+                --text-muted: #b4b4c8; 
+            }
+            /* Expand touch targets for contact hub */
+            .btn-contact {
+                padding: 14px 24px !important;
+                font-size: 0.9rem !important;
+            }
         }
     </style>
 </head>
