@@ -244,15 +244,21 @@
             border-top: 1px solid var(--border);
         }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease-out; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: 0.8s all ease-out; 
+        }
+        .reveal.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        /* Fail-safe for mobile: if JS fails, show content */
         @media (max-width: 768px) {
-            nav { padding: 20px; }
-            .nav-links { display: none; }
-            .hero-title { font-size: 3.5rem; }
-            .section { padding: 60px 24px; }
-            .bento-grid { grid-template-columns: 1fr; }
+            .reveal { 
+                opacity: 1 !important; 
+                transform: none !important; 
+            }
         }
     </style>
 </head>
@@ -629,28 +635,32 @@
                 如果您正在尋找能真正將 AI 落地為穩定產品的合作夥伴，歡迎隨時聯繫。
             </p>
             
-            <!-- Contact Hub -->
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+            <!-- Studio-Style Contact Hub -->
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; font-family: 'JetBrains Mono', monospace;">
                 <!-- Email -->
-                <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; max-width: 200px; text-align: center; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s;">
-                    <span style="font-size: 1.5rem;">✉️</span>
-                    <span style="font-size: 0.9rem; font-weight: 600;">Email</span>
+                <a href="mailto:cheerhuan@gmail.com" style="color: var(--text-main); text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; opacity: 0.8;" onmouseover="this.style.opacity='1'; this.style.color='var(--accent-green)';" onmouseout="this.style.opacity='0.8'; this.style.color='var(--text-main)';">
+                    <span>✉️</span> Email
                 </a>
                 
                 <!-- Line -->
-                <div class="btn-contact" style="flex: 1; max-width: 200px; text-align: center; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; cursor: pointer; transition: 0.3s;" onmouseover="this.querySelector('.qr-popup').style.opacity='1'; this.querySelector('.qr-popup').style.transform='translateY(0) scale(1)';" onmouseout="this.querySelector('.qr-popup').style.opacity='0'; this.querySelector('.qr-popup').style.transform='translateY(10px) scale(0.9)';">
-                    <span style="font-size: 1.5rem;">🟢</span>
-                    <div class="qr-popup" style="position: absolute; bottom: 110%; left: 50%; transform: translate(-50%, 10px) scale(0.9); opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 10; background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                        <img src="assets/qr/line.jpg" style="width: 150px; height: 150px; display: block; border-radius: 4px;">
+                <div style="position: relative; cursor: pointer; color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; opacity: 0.8;" 
+                     onmouseover="this.querySelector('.qr-popup').style.opacity='1'; this.querySelector('.qr-popup').style.transform='translate(-50%, 0) scale(1)';" 
+                     onmouseout="this.querySelector('.qr-popup').style.opacity='0'; this.querySelector('.qr-popup').style.transform='translate(-50%, 10px) scale(0.9)';"
+                     onclick="this.querySelector('.qr-popup').style.opacity = this.querySelector('.qr-popup').style.opacity == '1' ? '0' : '1';">
+                    <span>🟢</span> Line
+                    <div class="qr-popup" style="position: absolute; bottom: 150%; left: 50%; transform: translate(-50%, 10px) scale(0.9); opacity: 0; pointer-events: auto; transition: 0.3s ease; z-index: 100; background: white; padding: 8px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                        <img src="assets/qr/line.jpg" style="width: 160px; height: 160px; display: block; border-radius: 4px;">
                     </div>
                 </div>
 
                 <!-- WeChat -->
-                <div class="btn-contact" style="flex: 1; max-width: 200px; text-align: center; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; cursor: pointer; transition: 0.3s;" onmouseover="this.querySelector('.qr-popup').style.opacity='1'; this.querySelector('.qr-popup').style.transform='translateY(0) scale(1)';" onmouseout="this.querySelector('.qr-popup').style.opacity='0'; this.querySelector('.qr-popup').style.transform='translateY(10px) scale(0.9)';">
-                    <span style="font-size: 1.5rem;">💬</span>
-                    <span style="font-size: 0.9rem; font-weight: 600;">WeChat</span>
-                    <div class="qr-popup" style="position: absolute; bottom: 110%; left: 50%; transform: translate(-50%, 10px) scale(0.9); opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 10; background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                        <img src="assets/qr/wechat.jpg" style="width: 150px; height: 150px; display: block; border-radius: 4px;">
+                <div style="position: relative; cursor: pointer; color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; opacity: 0.8;" 
+                     onmouseover="this.querySelector('.qr-popup').style.opacity='1'; this.querySelector('.qr-popup').style.transform='translate(-50%, 0) scale(1)';" 
+                     onmouseout="this.querySelector('.qr-popup').style.opacity='0'; this.querySelector('.qr-popup').style.transform='translate(-50%, 10px) scale(0.9)';"
+                     onclick="this.querySelector('.qr-popup').style.opacity = this.querySelector('.qr-popup').style.opacity == '1' ? '0' : '1';">
+                    <span>💬</span> WeChat
+                    <div class="qr-popup" style="position: absolute; bottom: 150%; left: 50%; transform: translate(-50%, 10px) scale(0.9); opacity: 0; pointer-events: auto; transition: 0.3s ease; z-index: 100; background: white; padding: 8px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                        <img src="assets/qr/wechat.jpg" style="width: 160px; height: 160px; display: block; border-radius: 4px;">
                     </div>
                 </div>
             </div>
@@ -660,6 +670,7 @@
                 <a href="#works" class="btn-contact" style="background: transparent; color: var(--text-main); border: 1px solid var(--border); padding: 16px 32px;">View Case Studies ↗</a>
             </div>
         </div>
+    </section>
     </section>
 
     <footer>
