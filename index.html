@@ -289,49 +289,39 @@
     <section class="section" id="about">
         <div class="reveal">
             <div class="section-header" style="text-align: left; max-width: 1200px; margin: 0 auto 80px;">
-                <h2 style="font-size: 4rem; line-height: 1; margin-bottom: 20px;">About <span style="color: var(--accent-purple);">Me.</span></h2>
+                <h2 style="font-size: clamp(3rem, 8vw, 4rem); line-height: 1; margin-bottom: 20px;">About <span style="color: var(--accent-purple);">Me.</span></h2>
                 <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px;">R&D Engineer specializing in AI Automation & System Architecture</p>
             </div>
 
-            <!-- Segment 1: The Hook (Interleaved) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; margin-bottom: 120px;">
-                <div style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em;">
+            <!-- Combined Narrative: Hook -> Pain -> USP -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: start; margin-bottom: 120px;">
+                <div style="font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em;">
                     讓 AI 不只是技術，<br>而是能<span style="color: var(--accent-green);">真正幫你工作</span>的工具。
                 </div>
                 <div style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
-                    我目前主要協助工作室與個人品牌，設計與導入 AI Agent、自動化流程與智慧系統。我不追求複雜的技術堆砌，而是在意整個流程能否<span style="color: var(--text-main);">順順地運作</span>。
+                    我協助工作室與個人品牌，設計並導入 AI Agent 與自動化流程。我不追求複雜的技術堆砌，而是在意整個流程能否<span style="color: var(--text-main);">順順地運作</span>。<br><br>
+                    許多人被重複但必要的工作困住，這些雜訊吃掉了創造力。我的目標就是消除這些雜訊，將 AI 轉化為確定性的交付能力。
                 </div>
             </div>
 
-            <!-- Segment 2: The Pain (Interleaved Inverse) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; margin-bottom: 120px; direction: rtl; text-align: right;">
-                <div style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; direction: ltr; text-align: left;">
-                    很多時候，我們被<br><span style="color: var(--accent-cyan);">重複但必要</span>的工作困住。
-                </div>
-                <div style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; direction: ltr; text-align: left;">
-                    回訊息、處理客服、整理資訊... 這些事情不難，但會一點一點吃掉你的時間。如果你感覺事情一直在做，但沒有真的往前推進，那這就是我們需要解決的地方。
-                </div>
-            </div>
-
-            <!-- Segment 3: The Bridge (Industrial Rigor) -->
-            <div class="section-box" style="padding: 60px; border-color: var(--accent-purple); background: radial-gradient(circle at top left, rgba(167, 139, 250, 0.1), transparent); margin-bottom: 120px; position: relative;">
-                <div style="position: absolute; top: -20px; left: 40px; background: var(--accent-purple); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 4px 12px; border-radius: 4px;">THE BACKGROUND</div>
+            <!-- Industrial Precision: The USP (Replacing the old Background section) -->
+            <div class="section-box" style="padding: 60px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); border-radius: 24px; margin-bottom: 120px; position: relative; backdrop-filter: blur(10px);">
+                <div style="position: absolute; top: -15px; left: 40px; background: var(--accent-purple); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 4px 12px; border-radius: 4px; font-weight: 700;">INDUSTRIAL RIGOR</div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
                     <div>
-                        <h3 style="font-size: 2rem; margin-bottom: 20px;">從半導體設備到<br>AI 基礎設施</h3>
+                        <h3 style="font-size: 2rem; margin-bottom: 20px; letter-spacing: -0.02em;">工業級精準度<br>定義 AI 交付</h3>
                         <p style="color: var(--text-muted); line-height: 1.8;">
-                            我的職業生涯始於半導體設備工程。在那種極致追求精準的環境中，「差不多」就是災難。這讓我養成了一個習慣：在動手前，必須預判所有失敗路徑，並建立絕對可靠的備援方案。
+                            我的工程基因源自於半導體設備領域——在那種極致追求精準的環境中，「差不多」就是災難。
                         </p>
                     </div>
                     <div style="padding: 30px; background: rgba(0,0,0,0.3); border-radius: 20px; border: 1px solid var(--border);">
                         <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8;">
-                            現在，我將這種<span style="color: var(--accent-green);">「零容忍」的工業邏輯</span>移植到 AI 領域。透過構建 <code>Model Fallback</code> 與 <code>Core Flow</code>，我將 AI 從隨機的嘗試，轉化為確定性的交付。
+                            我將這種<span style="color: var(--accent-green); font-weight: 600;">「零容忍」的工業邏輯</span>移植到 AI 領域。透過構建 Model Fallback 與 Core Flow，我確保 AI 不再是隨機的嘗試，而是像工業設備一樣穩定且可預測的生產力。
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Segment 4: The Promise -->
             <div style="text-align: center; max-width: 700px; margin: 0 auto 80px;">
                 <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 30px; line-height: 1.6;">
                     如果你正在想：<br>
