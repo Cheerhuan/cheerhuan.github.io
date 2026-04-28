@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Your Token Case Study | Casper Hsieh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">~/casper_hsieh</a>
+    </nav>
+
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <header class="case-header">
+            <div class="case-badge">Case Study: Data Engineering</div>
+            <h1>Save Your Token 🦀<br><span>The Art of Semantic Distillation.</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                對抗 Token 稅。透過自適應解析，將雜訊極大的網頁轉化為高純度資訊。
+            </p>
+        </header>
+
+        <div class="section-box">
+            <h2><span>🚩</span> The Challenge</h2>
+            <p>在使用 LLM 處理長文或網頁時，我們面臨著嚴重的<strong>「Token 浪費」</strong>問題：</p>
+            <ul style="margin-top: 15px; color: var(--text-muted); padding-left: 20px;">
+                <li><strong>視覺雜訊</strong>：導覽列、廣告、頁尾等無用 HTML 佔據了 70% 以上的 Token。</li>
+                <li><strong>結構混亂</strong>：PDF 轉文字後的斷行與表格錯位導致模型理解偏差。</li>
+                <li><strong>成本壓力</strong>：對於大規模文件分析，不必要的 Token 浪費直接導致成本激增且降低模型推理品質。</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💡</span> The Insight</h2>
+            <p>我意識到，AI 不需要「完整的網頁」，它需要的是<strong>「純淨的語義結構」</strong>。</p>
+            <p style="margin-top: 15px;">我將其定義為 <strong>「語義蒸餾 (Semantic Distillation)」</strong>：透過一套自適應的過濾 pipeline，識別並保留內容的核心骨幹，剔除所有不影響理解的視覺元素。這就像是將一塊原礦石（Raw HTML）精煉成純金（Pure Markdown）。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>🛠️</span> The Execution</h2>
+            <p>我實作了一套基於 <code>MarkItDown</code> 與 <code>Trafilatura</code> 的強化 pipeline：</p>
+            <div style="margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-muted);">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
+                    <strong>Input</strong>: Raw URL / PDF / Docx<br>
+                    $\downarrow$<br>
+                    <strong>Adaptive Cleaning</strong> $\rightarrow$ 識別主內容區塊 $\rightarrow$ 剔除 Boilerplate<br>
+                    $\downarrow$
+                    <strong>Semantic Mapping</strong> $\rightarrow$ 恢復表格結構 $\rightarrow$ 轉換為高純度 Markdown<br>
+                    $\downarrow$<br>
+                    <strong>Output</strong>: LLM-Ready Content
+                </div>
+            </div>
+            <p style="margin-top: 20px;">這套系統能動態根據文件類型調整解析策略，確保在最大限度壓縮 Token 的同時，零損失關鍵資訊。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💎</span> Interactive Proof: Token Purity</h2>
+            <p>視覺化展示一個典型網頁在經過「語義蒸餾」後的 Token 占用變化：</p>
+            <div class="token-viz">
+                <div class="token-bar-wrapper">
+                    <span class="token-label">Raw HTML</span>
+                    <div class="token-bar"><div class="token-fill fill-raw"></div></div>
+                    <span class="token-label" style="text-align: right;">100%</span>
+                </div>
+                <div class="token-bar-wrapper">
+                    <span class="token-label">Distilled</span>
+                    <div class="token-bar"><div class="token-fill fill-distilled"></div></div>
+                    <span class="token-label" style="text-align: right;">~35%</span>
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: 15px;">
+                剔除 65% 的雜訊，將 Token 成本降低至原本的三分之一，同時提升模型推理精度。
+            </p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>📈</span> The Impact</h2>
+
+                <div class="impact-card">
+                    <span class="impact-value">60%+</span>
+                    <span class="impact-label">Token Reduction</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">High</span>
+                    <span class="impact-label">Extraction Purity</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Fast</span>
+                    <span class="impact-label">Processing Speed</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/cheerhuan/save-your-token" class="btn-primary">View on GitHub ↗</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCLI Case Study | Casper Hsieh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">~/casper_hsieh</a>
+    </nav>
+
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <header class="case-header">
+            <div class="case-badge">Case Study: AI Infrastructure</div>
+            <h1>OpenCLI 🚀<br><span>Breaking the API Wall.</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                將複雜的 Web 介面轉化為標準化 CLI，讓 AI Agent 獲得真正的「Web 自由」。
+            </p>
+        </header>
+
+        <div class="section-box">
+            <h2><span>🚩</span> The Challenge</h2>
+            <p>現代 Web 應用程式（SPA, React, Vue）已演變為複雜的狀態機。對於 AI Agent 而言，傳統的 HTTP 請求或簡單的 Scraper 面臨三個死胡同：</p>
+            <ul style="margin-top: 15px; color: var(--text-muted); padding-left: 20px;">
+                <li><strong>動態渲染</strong>：內容在客戶端生成，傳統抓取工具只能拿到空白 HTML。</li>
+                <li><strong>反爬蟲牆</strong>：Cloudflare, CAPTCHA 與複雜的 Cookie 驗證讓 Agent 頻繁失效。</li>
+                <li><strong>交互斷層</strong>：Agent 能「讀」網頁，但很難在無需 API 的情況下完成「登入 $\rightarrow$ 搜尋 $\rightarrow$ 提交」的複雜工作流。</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💡</span> The Insight</h2>
+            <p>我意識到，解決方案不在於開發更強的 Scraper，而在於<strong>「介面適配 (Interface Adaptation)」</strong>。</p>
+            <p style="margin-top: 15px;">如果我們能將整個瀏覽器會話（Session）封裝成一個 <strong>標準的 CLI 工具</strong>，AI Agent 就不需要學習複雜的 DOM 結構，而只需要執行簡單的 Shell 指令。這將 Web 操作從「不可預測的網頁交互」轉化為「可確定性的指令執行」。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>🛠️</span> The Execution</h2>
+            <p>我構建了一套分層架構來實現這一目標：</p>
+            <div style="margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-muted);">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-cyan);">
+                    <strong>Browser Layer</strong> $\rightarrow$ Playwright / Firecrawl (處理動態渲染與認證)<br>
+                    $\downarrow$<br>
+                    <strong>Adapter Layer</strong> $\rightarrow$ 將 DOM 狀態轉化為結構化 Markdown/JSON<br>
+                    $\downarrow$<br>
+                    <strong>CLI Interface</strong> $\rightarrow$ 提供標準化指令 (例如: <code>opencli search "AI Agents"</code>)
+                </div>
+            </div>
+            <p style="margin-top: 20px;">這種設計讓 AI Agent 能以極低的 Token 成本，透過單一入口操作數百個不同的網站，且完全無視後端的 API 限制。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>⚡</span> Interactive Proof: The Power of Adaptation</h2>
+            <p>對比傳統的 Web 抓取與 OpenCLI 的輸出結果：</p>
+            <div class="comparison-container">
+                <div class="comp-box fail">
+                    <span class="comp-label">Traditional Scraper / Raw HTML</span>
+                    <div class="comp-code">&lt;div class="nav-wrapper"&gt;...&lt;script src="bundle.js"&gt;...&lt;div id="app"&gt;Loading...&lt;/div&gt;...&lt;footer&gt;Copyright 2026&lt;/footer&gt;</div></div>
+                </div>
+                <div class="comp-box success">
+                    <span class="comp-label">OpenCLI / Structured Output</span>
+                    <div class="comp-code"># Search Result: AI Agents\n- [Agent A]: High autonomy, ACP support\n- [Agent B]: Focus on data extraction\n- [Agent C]: Specialized in coding</div>
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: 15px;">
+                從「不可讀的 HTML 雜訊」到「AI 原生的結構化資訊」。
+            </p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>📈</span> The Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-value">300+</span>
+                    <span class="impact-label">Sites Bypassed</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Zero</span>
+                    <span class="impact-label">API Dependencies</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">10x</span>
+                    <span class="impact-label">Agent Efficiency</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/cheerhuan/opencli-skill-dev" class="btn-primary">View on GitHub ↗</a>
+        </div>
+    </div>
+</body>
+</html>
