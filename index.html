@@ -353,68 +353,108 @@
     <section class="section" id="works">
         <div class="section-header reveal">
             <h2>Featured Works</h2>
-            <p>A collection of high-impact AI infrastructure and toolsets.</p>
+            <p>High-impact AI infrastructure designed for scalability and resilience.</p>
         </div>
         <div class="bento-grid">
             <!-- Project 1: OpenCLI -->
-            <a href="projects/opencli/index.html" class="project-card reveal">
+            <div class="project-card reveal">
                 <img src="https://raw.githubusercontent.com/cheerhuan/opencli-skill-dev/main/assets/hero.jpg" class="project-img" alt="OpenCLI" onerror="this.src='https://images.unsplash.com/photo-1639322537228-f710d846f8a6?auto=format&fit=crop&w=800&q=80'">
-                <div class="project-name">OpenCLI 🚀 <span class="project-impact">300+ Sites Bypassed</span></div>
-                <div class="project-desc">將任何網站、瀏覽器會話或 Electron App 轉化為標準化 CLI。讓 AI Agent 突破 API 限制，直接操作 Web。</div>
-                <div class="project-tags">
-                    <span class="tag">Web Automation</span>
-                    <span class="tag">AI-Native</span>
-                    <span class="tag">CLI</span>
+                <div class="project-name">OpenCLI 🚀 <span class="project-impact">Web-to-CLI</span></div>
+                
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> API 限制與動態網頁導致 Agent 無法有效操作 Web。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 構建介面適配層，將瀏覽器會話轉化為標準化 CLI 指令。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 成功繞過 300+ 網站限制，實現零 API 依賴的自動化。</div>
+                    <div class="project-tags">
+                        <span class="tag">Playwright</span><span class="tag">Firecrawl</span><span class="tag">Adaptive Parsing</span>
+                    </div>
                 </div>
-            </a>
+                
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <a href="projects/opencli/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                </div>
+            </div>
 
             <!-- Project 2: Save Your Token -->
-            <a href="projects/save-your-token/index.html" class="project-card reveal">
+            <div class="project-card reveal">
                 <img src="https://raw.githubusercontent.com/cheerhuan/save-your-token/main/crab.png" class="project-img" alt="Save Your Token">
-                <div class="project-name">Save Your Token 🦀 <span class="project-impact">60%+ Token Save</span></div>
-                <div class="project-desc">極致省 Token 的文件分析工具。利用自適應解析演算法，將複雜文件轉化為高純度 Markdown。</div>
-                <div class="project-tags">
-                    <span class="tag">Token Efficiency</span>
-                    <span class="tag">MarkItDown</span>
-                    <span class="tag">Parsing</span>
+                <div class="project-name">Save Your Token 🦀 <span class="project-impact">Token Efficiency</span></div>
+                
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 網頁雜訊導致 Token 浪費，增加成本並降低模型推理精度。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 實作「語義蒸餾」Pipeline，剔除冗餘內容並恢復結構。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 平均降低 60%+ Token 消耗，顯著提升長文本分析速度。</div>
+                    <div class="project-tags">
+                        <span class="tag">MarkItDown</span><span class="tag">Trafilatura</span><span class="tag">Markdown</span>
+                    </div>
                 </div>
-            </a>
+                
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <a href="projects/save-your-token/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                </div>
+            </div>
 
             <!-- Project 3: ACP Protocol -->
-            <a href="projects/acp-protocol/index.html" class="project-card reveal">
+            <div class="project-card reveal">
                 <img src="https://raw.githubusercontent.com/cheerhuan/ACP-Protocol/main/assets/logo.jpg" class="project-img" alt="ACP Protocol" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=800&q=80'">
-                <div class="project-name">ACP Protocol 🤝 <span class="project-impact">Zero-Loss Handoff</span></div>
-                <div class="project-desc">AI Agent 的通用狀態層。打破平台壁壘，讓不同 Agent 之間能透過檔案系統實現精準的狀態交接。</div>
-                <div class="project-tags">
-                    <span class="tag">Multi-Agent</span>
-                    <span class="tag">State Layer</span>
-                    <span class="tag">Protocol</span>
+                <div class="project-name">ACP Protocol 🤝 <span class="project-impact">State Layer</span></div>
+                
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 跨 Session 或跨 Agent 時，任務狀態丟失導致記憶斷層。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 定義標準化狀態交換協議，將記憶解耦至外部檔案層。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 實現零損失的任務移交，支持異構 Agent 之間的無縫協作。</div>
+                    <div class="project-tags">
+                        <span class="tag">JSON-Schema</span><span class="tag">Multi-Agent</span><span class="tag">State-Sync</span>
+                    </div>
                 </div>
-            </a>
+                
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <a href="projects/acp-protocol/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                </div>
+            </div>
 
             <!-- Project 4: Model Fallback -->
-            <a href="projects/model-fallback/index.html" class="project-card reveal">
+            <div class="project-card reveal">
                 <img src="https://raw.githubusercontent.com/cheerhuan/hermes-model-fallback/main/assets/logo.jpg" class="project-img" alt="Model Fallback">
-                <div class="project-name">Model Fallback 🛡️ <span class="project-impact">99.9% Availability</span></div>
-                <div class="project-desc">AI Agent 的終極韌性層。自動處理 429/503 錯誤，在主模型失效時無縫切換至備用模型。</div>
-                <div class="project-tags">
-                    <span class="tag">Resilience</span>
-                    <span class="tag">Failover</span>
-                    <span class="tag">Stability</span>
+                <div class="project-name">Model Fallback 🛡️ <span class="project-impact">Resilience</span></div>
+                
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 單一模型供應商的 429/503 錯誤導致生產環境中斷。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 實作自動失效切換機制，在毫秒級時間內無縫切換備用模型。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 將系統可用性提升至 99.9%，消除單點失效風險。</div>
+                    <div class="project-tags">
+                        <span class="tag">Error-Handling</span><span class="tag">Failover</span><span class="tag">LLMOps</span>
+                    </div>
                 </div>
-            </a>
+                
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <a href="projects/model-fallback/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                </div>
+            </div>
 
             <!-- Project 5: Core Flow -->
-            <a href="projects/core-flow/index.html" class="project-card reveal">
+            <div class="project-card reveal">
                 <img src="https://raw.githubusercontent.com/cheerhuan/hermes-core-flow/main/assets/banner.jpg" class="project-img" alt="Core Flow">
-                <div class="project-name">Hermes Core Flow ⚙️ <span class="project-impact">Industrial Grade</span></div>
-                <div class="project-desc">標準化核心開發工作流。整合 CaMeL 安全邊界與雲端部署模板，定義工業級 Agent 實作標準。</div>
-                <div class="project-tags">
-                    <span class="tag">Infrastructure</span>
-                    <span class="tag">Security</span>
-                    <span class="tag">Workflow</span>
+                <div class="project-name">Core Flow ⚙️ <span class="project-impact">Standardization</span></div>
+                
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> Agent 開發缺乏標準，導致部署困難且安全邊界模糊。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 整合 CaMeL 安全邊界與標準化部署模板，定義工業級流水線。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result</strong>: 極大縮短從開發到生產的週期，確保執行環境的絕對安全。</div>
+                    <div class="project-tags">
+                        <span class="tag">Docker</span><span class="tag">Security</span><span class="tag">CI/CD</span>
+                    </div>
                 </div>
-            </a>
+                
+                <div style="display: flex; gap: 10px; margin-top: auto;">
+                    <a href="projects/core-flow/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                </div>
+            </div>
         </div>
     </section>
 
