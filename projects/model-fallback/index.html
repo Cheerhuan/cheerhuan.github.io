@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Fallback Case Study | Casper Hsieh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">~/casper_hsieh</a>
+    </nav>
+
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <header class="case-header">
+            <div class="case-badge">Case Study: System Resilience</div>
+            <h1>Model Fallback 🛡️<br><span>The Ultimate Safety Net.</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                對抗 API 不穩定性。確保 AI Agent 在任何情況下都能保持 99.9% 的可用性。
+            </p>
+        </header>
+
+        <div class="section-box">
+            <h2><span>🚩</span> The Challenge</h2>
+            <p>在生產環境中，依賴單一 LLM 供應商是一個巨大的風險：</p>
+            <ul style="margin-top: 15px; color: var(--text-muted); padding-left: 20px;">
+                <li><strong>Rate Limits (429)</strong>：在高併發時，主模型頻繁觸發速率限制，導致任務中斷。</li>
+                <li><strong>Server Errors (503)</strong>：模型供應商伺服器崩潰或維護，造成系統全面癱瘓。</li>
+                <li><strong>延遲波動</strong>：部分模型在特定時段響應極慢，嚴重影響用戶體驗。</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💡</span> The Insight</h2>
+            <p>韌性 (Resilience) 不應該是 AI 模型的特性，而應該是<strong>「基礎設施的能力」</strong>。</p>
+            <p style="margin-top: 15px;">我意識到，如果能在請求層建立一個<strong>「自動失效切換 (Failover)」</strong>機制，將主模型與備用模型池 (Fallback Pool) 邏輯分離，Agent 就能在主模型失效的毫秒級時間內無縫切換至次優模型，而用戶完全感知不到中斷。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>🛠️</span> The Execution</h2>
+            <p>我實作了一套工業級的模型切換邏輯：</p>
+            <div style="margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-muted);">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                    <strong>Interceptor</strong> $\rightarrow$ 監控所有 API 響應狀態碼 (429, 503, Timeout)<br>
+                    $\downarrow$<br>
+                    <strong>Priority Queue</strong> $\rightarrow$ 根據性能與成本定義模型優先級 (e.g., GPT-4o $\rightarrow$ Claude 3.5 $\rightarrow$ Gemini 1.5)<br>
+                    $\downarrow$<br>
+                    <strong>Transparent Retry</strong> $\rightarrow$ 自動重新封裝 Prompt 並請求下一級模型 $\rightarrow$ 返回結果
+                </div>
+            </div>
+            <p style="margin-top: 20px;">這種設計將 Agent 從對單一 API 的依賴中解放出來，實現了真正的「高可用 AI 服務」。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>📈</span> The Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-value">99.9%</span>
+                    <span class="impact-label">Availability</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Zero</span>
+                    <span class="impact-label">Downtime</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Multi</span>
+                    <span class="impact-label">Provider Support</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/cheerhuan/hermes-model-fallback" class="btn-primary">View on GitHub ↗</a>
+        </div>
+    </div>
+</body>
+</html>

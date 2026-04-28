@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Flow Case Study | Casper Hsieh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">~/casper_hsieh</a>
+    </nav>
+
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <header class="case-header">
+            <div class="case-badge">Case Study: Infrastructure Standard</div>
+            <h1>Core Flow ⚙️<br><span>Defining Industrial Agent Standards.</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                將 AI Agent 的開發從「實驗室隨機嘗試」轉化為「工業級標準化流程」。
+            </p>
+        </header>
+
+        <div class="section-box">
+            <h2><span>🚩</span> The Challenge</h2>
+            <p>大多數 AI Agent 專案在開發初期非常快速，但隨著複雜度增加，會陷入<strong>「維護地獄」</strong>：</p>
+            <ul style="margin-top: 15px; color: var(--text-muted); padding-left: 20px;">
+                <li><strong>環境不一致</strong>：在開發者 A 的電腦能跑，部署到伺服器就崩潰。</li>
+                <li><strong>安全邊界模糊</strong>：Agent 直接操作系統，缺乏有效的沙箱限制，存在極高的安全風險。</li>
+                <li><strong>缺乏生命週期管理</strong>：沒有統一的初始化、監控與部署標準，導致重複造輪子。</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💡</span> The Insight</h2>
+            <p>我意識到，AI Agent 需要一套類似於 <strong>「操作系統核心 (OS Core)」</strong> 的標準化底層。</p>
+            <p style="margin-top: 15px;">如果我們能定義一套標準的 <strong>Core Flow</strong> —— 整合安全邊界 (CaMeL)、統一的配置管理與雲端部署模板，開發者就可以將精力專注於「業務邏輯」而非「基礎設施」，從而極大提升交付品質與速度。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>🛠️</span> The Execution</h2>
+            <p>我構建了一套標準化的開發與部署管線：</p>
+            <div style="margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-muted);">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-cyan);">
+                    <strong>CaMeL Boundary</strong> $\rightarrow$ 實作嚴格的系統訪問控制與安全沙箱<br>
+                    $\downarrow$<br>
+                    <strong>Cloud Template</strong> $\rightarrow$ 提供一鍵部署的 Dockerized 環境配置<br>
+                    $\downarrow$<br>
+                    <strong>Standard Lifecycle</strong> $\rightarrow$ 定義從 init $\rightarrow$ exec $\rightarrow$ cleanup 的完整生命週期
+                </div>
+            </div>
+            <p style="margin-top: 20px;">這將 Agent 的開發從「隨機藝術」轉化為「精確工程」。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>📈</span> The Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-value">Industrial</span>
+                    <span class="impact-label">Grade Stability</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Fast</span>
+                    <span class="impact-label">Deployment Cycle</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Secure</span>
+                    <span class="impact-label">Execution Boundary</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/cheerhuan/hermes-core-flow" class="btn-primary">View on GitHub ↗</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACP Protocol Case Study | Casper Hsieh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+<body>
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <nav>
+        <a href="../../index.html" class="logo">~/casper_hsieh</a>
+    </nav>
+
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <header class="case-header">
+            <div class="case-badge">Case Study: Multi-Agent Orchestration</div>
+            <h1>ACP Protocol 🤝<br><span>The Universal State Layer.</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px;">
+                打破 Agent 間的記憶壁壘，實現零損失的狀態交接。
+            </p>
+        </header>
+
+        <div class="section-box">
+            <h2><span>🚩</span> The Challenge</h2>
+            <p>在多 Agent 協作或跨 session 任務中，我們面臨著嚴重的<strong>「記憶斷層 (Memory Gap)」</strong>問題：</p>
+            <ul style="margin-top: 15px; color: var(--text-muted); padding-left: 20px;">
+                <li><strong>狀態丟失</strong>：當任務從 Agent A 移交至 Agent B 時，中間的推理過程與關鍵決策往往在轉移中遺失。</li>
+                <li><strong>平台依賴</strong>：不同 Agent 平台的記憶儲存格式不統一，導致狀態無法在不同工具間無縫遷移。</li>
+                <li><strong>上下文爆炸</strong>：試圖透過超長 Prompt 傳遞所有狀態會導致 Token 成本激增且增加模型幻覺。</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h2><span>💡</span> The Insight</h2>
+            <p>我意識到，狀態不應該被視為「對話紀錄」，而應該被視為<strong>「結構化的檔案層」</strong>。</p>
+            <p style="margin-top: 15px;">如果我們能定義一套標準的 <strong>Agent Collaboration Protocol (ACP)</strong>，將任務狀態（Goal, Context, Progress, Constraints）解耦並儲存在外部檔案系統中，那麼任何符合協議的 Agent 都能在秒級時間內「接管」任務，而無需重新閱讀冗長的歷史紀錄。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>🛠️</span> The Execution</h2>
+            <p>我設計了一套輕量級的狀態交換協議：</p>
+            <div style="margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-muted);">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-purple);">
+                    <strong>ACP Schema</strong>: 
+                    { "goal": "...", "state": "...", "artifacts": ["path/to/file"], "next_step": "..." }<br>
+                    $\downarrow$<br>
+                    <strong>Handoff Mechanism</strong> $\rightarrow$ 透過結構化 ACP 檔案實現跨 Session/跨 Agent 同步<br>
+                    $\downarrow$<br>
+                    <strong>Deterministic Recovery</strong> $\rightarrow$ 接手 Agent 直接讀取 ACP 狀態 $\rightarrow$ 立即進入執行狀態
+                </div>
+            </div>
+            <p style="margin-top: 20px;">這種設計將 AI 的協作模式從「模糊的對話接龍」提升為「精確的狀態同步」。</p>
+        </div>
+
+        <div class="section-box">
+            <h2><span>📈</span> The Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-value">Zero</span>
+                    <span class="impact-label">Loss Handoff</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Platform</span>
+                    <span class="impact-label">Agnostic</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-value">Fast</span>
+                    <span class="impact-label">State Recovery</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/cheerhuan/ACP-Protocol" class="btn-primary">View on GitHub ↗</a>
+        </div>
+    </div>
+</body>
+</html>
