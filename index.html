@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* --- Background Glows --- */
         .glow-sphere {
             position: fixed;
             width: 60vw;
@@ -42,7 +41,6 @@
         .glow-1 { top: -10%; left: -10%; background: var(--accent-purple); }
         .glow-2 { bottom: -10%; right: -10%; background: var(--accent-green); }
 
-        /* --- Navigation --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -72,7 +70,6 @@
         }
         .nav-links a:hover { color: var(--text-main); }
 
-        /* --- Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -112,7 +109,6 @@
             margin-bottom: 40px;
         }
 
-        /* --- Projects Bento Grid --- */
         .section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
         .section-header { margin-bottom: 60px; text-align: center; }
         .section-header h2 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
@@ -149,9 +145,10 @@
             background: #1a1a25;
             border-radius: 16px;
             margin-bottom: 20px;
-            object-fit: cover;
+            object-fit: contain;
             border: 1px solid var(--border);
             transition: 0.3s;
+            background-color: rgba(0,0,0,0.2);
         }
         .project-card:hover .project-img {
             border-color: var(--accent-purple);
@@ -170,7 +167,6 @@
             border: 1px solid var(--border);
         }
 
-        /* --- Contact Section --- */
         .contact-section {
             text-align: center;
             padding: 100px 24px;
@@ -201,7 +197,6 @@
             border-top: 1px solid var(--border);
         }
 
-        /* --- Animations --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease-out; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -255,7 +250,7 @@
         <div class="bento-grid">
             <!-- Project 1: OpenCLI -->
             <a href="https://github.com/cheerhuan/opencli-skill-dev" class="project-card reveal">
-                <img src="assets/opencli_preview.jpg" class="project-img" alt="OpenCLI">
+                <img src="https://raw.githubusercontent.com/cheerhuan/opencli-skill-dev/main/assets/hero.jpg" class="project-img" alt="OpenCLI" onerror="this.src='https://images.unsplash.com/photo-1639322537228-f710d846f8a6?auto=format&fit=crop&w=800&q=80'">
                 <div class="project-name">OpenCLI 🚀</div>
                 <div class="project-desc">將任何網站、瀏覽器會話或 Electron App 轉化為標準化 CLI。讓 AI Agent 突破 API 限制，直接操作 Web。</div>
                 <div class="project-tags">
@@ -267,7 +262,7 @@
 
             <!-- Project 2: Save Your Token -->
             <a href="https://github.com/cheerhuan/save-your-token" class="project-card reveal">
-                <img src="assets/syt_preview.jpg" class="project-img" alt="Save Your Token">
+                <img src="https://raw.githubusercontent.com/cheerhuan/save-your-token/main/crab.png" class="project-img" alt="Save Your Token">
                 <div class="project-name">Save Your Token 🦀</div>
                 <div class="project-desc">極致省 Token 的文件分析工具。利用自適應解析演算法，將複雜文件轉化為高純度 Markdown。</div>
                 <div class="project-tags">
@@ -279,7 +274,7 @@
 
             <!-- Project 3: ACP Protocol -->
             <a href="https://github.com/cheerhuan/ACP-Protocol" class="project-card reveal">
-                <img src="assets/acp_preview.jpg" class="project-img" alt="ACP Protocol">
+                <img src="https://raw.githubusercontent.com/cheerhuan/ACP-Protocol/main/assets/logo.jpg" class="project-img" alt="ACP Protocol" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=800&q=80'">
                 <div class="project-name">ACP Protocol 🤝</div>
                 <div class="project-desc">AI Agent 的通用狀態層。打破平台壁壘，讓不同 Agent 之間能透過檔案系統實現精準的狀態交接。</div>
                 <div class="project-tags">
@@ -291,7 +286,7 @@
 
             <!-- Project 4: Model Fallback -->
             <a href="https://github.com/cheerhuan/hermes-model-fallback" class="project-card reveal">
-                <img src="assets/fallback_preview.jpg" class="project-img" alt="Model Fallback">
+                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-model-fallback/main/assets/logo.jpg" class="project-img" alt="Model Fallback">
                 <div class="project-name">Model Fallback 🛡️</div>
                 <div class="project-desc">AI Agent 的終極韌性層。自動處理 429/503 錯誤，在主模型失效時無縫切換至備用模型。</div>
                 <div class="project-tags">
@@ -303,7 +298,7 @@
 
             <!-- Project 5: Continuity -->
             <a href="https://github.com/cheerhuan/openclaw-continuity" class="project-card reveal">
-                <img src="assets/continuity_preview.jpg" class="project-img" alt="Continuity">
+                <img src="https://raw.githubusercontent.com/cheerhuan/openclaw-continuity/main/assets/publish/hero-continuity-zh.svg" class="project-img" alt="Continuity">
                 <div class="project-name">OpenClaw Continuity ♾️</div>
                 <div class="project-desc">為 OpenClaw 補上穩定狀態引擎。實現 /new 後的主題接回、主動關心與自然追蹤。</div>
                 <div class="project-tags">
@@ -315,7 +310,7 @@
 
             <!-- Project 6: Core Flow -->
             <a href="https://github.com/cheerhuan/hermes-core-flow" class="project-card reveal">
-                <img src="assets/coreflow_preview.jpg" class="project-img" alt="Core Flow">
+                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-core-flow/main/assets/banner.jpg" class="project-img" alt="Core Flow">
                 <div class="project-name">Hermes Core Flow ⚙️</div>
                 <div class="project-desc">標準化核心開發工作流。整合 CaMeL 安全邊界與雲端部署模板，定義工業級 Agent 實作標準。</div>
                 <div class="project-tags">
