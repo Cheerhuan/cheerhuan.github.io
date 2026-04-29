@@ -111,10 +111,7 @@
             margin-bottom: 40px;
         }
 
-        .section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
-        .section-header { margin-bottom: 60px; text-align: center; }
-        .section-header h2 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
-        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+        .section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }\n        .section-header { margin-bottom: 60px; text-align: center; }\n        .section-header h2 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }\n        .section-header p { color: var(--text-muted); font-size: 1.1rem; }\n\n        /* --- Value Matrix Styles --- */\n        .value-section { margin-bottom: 80px; }\n        .value-header { \n            display: flex; \n            align-items: center; \n            gap: 15px; \n            margin-bottom: 30px; \n            border-left: 4px solid var(--accent-cyan); \n            padding-left: 20px; \n        }\n        .value-header h3 { \n            font-size: 1.8rem; \n            font-weight: 700; \n            letter-spacing: -0.02em; \n        }\n        .value-header p { \n            font-size: 0.9rem; \n            color: var(--text-muted); \n            margin-left: auto; \n            max-width: 400px; \n            text-align: right; \n        }\n        .value-layer-infra { --layer-accent: var(--accent-cyan); }\n        .value-layer-sol { --layer-accent: var(--accent-green); }\n        .value-layer-cap { --layer-accent: var(--accent-purple); }\n        .value-header.infra { border-color: var(--accent-cyan); }\n        .value-header.sol { border-color: var(--accent-green); }\n        .value-header.cap { border-color: var(--accent-purple); }\n
 
         /* --- Tech Arsenal Grid --- */
         .arsenal-grid {
@@ -417,113 +414,134 @@
         </div>
     </section>
 
+    
     <section class="section" id="works">
         <div class="section-header reveal">
             <h2>Featured Works</h2>
             <p>High-impact AI infrastructure designed for scalability and resilience.</p>
         </div>
-        <div class="bento-grid">
-            <!-- Project 1: OpenCLI -->
-            <div class="project-card reveal">
-                <img src="https://raw.githubusercontent.com/cheerhuan/opencli-skill-dev/main/assets/hero.jpg" class="project-img" alt="OpenCLI" onerror="this.src='https://images.unsplash.com/photo-1639322537228-f710d846f8a6?auto=format&fit=crop&w=800&q=80'">
-                <div class="project-name">OpenCLI 🚀 <span class="project-impact">Web-to-CLI</span></div>
-                
-                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
-                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> API 限制與動態網頁導致 Agent 無法有效操作 Web。</div>
-                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 構建介面適配層，將瀏覽器會話轉化為標準化 CLI 指令。</div>
-                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 成功繞過 300+ 網站限制，實現零 API 依賴的自動化。</div>
-                    <div class="project-tags">
-                        <span class="tag">Playwright</span><span class="tag">Firecrawl</span><span class="tag">Adaptive Parsing</span>
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 10px; margin-top: auto;">
-                    <a href="projects/opencli/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
-                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
-                </div>
-            </div>
 
-            <!-- Project 2: Save Your Token -->
-            <div class="project-card reveal">
-                <img src="https://raw.githubusercontent.com/cheerhuan/save-your-token/main/crab.png" class="project-img" alt="Save Your Token">
-                <div class="project-name">Save Your Token 🦀 <span class="project-impact">Token Efficiency</span></div>
-                
-                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
-                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 網頁雜訊導致 Token 浪費，增加成本並降低模型推理精度。</div>
-                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 實作「語義蒸餾」Pipeline，剔除冗餘內容並恢復結構。</div>
-                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 平均降低 60%+ Token 消耗，顯著提升長文本分析速度。</div>
-                    <div class="project-tags">
-                        <span class="tag">MarkItDown</span><span class="tag">Trafilatura</span><span class="tag">Markdown</span>
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 10px; margin-top: auto;">
-                    <a href="projects/save-your-token/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
-                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
-                </div>
+        <!-- Value Layer 1: Infrastructure -->
+        <div class="value-section reveal value-layer-infra">
+            <div class="value-header infra">
+                <h3>Infrastructure & Protocols</h3>
+                <p>Defining the standards for resilient and scalable AI Agent orchestration.</p>
             </div>
-
-            <!-- Project 3: ACP Protocol -->
+            <div class="bento-grid">
+                
             <div class="project-card reveal">
-                <img src="https://raw.githubusercontent.com/cheerhuan/ACP-Protocol/main/assets/logo.jpg" class="project-img" alt="ACP Protocol" onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=800&q=80'">
+                <img src="https://raw.githubusercontent.com/cheerhuan/ACP-Protocol/main/assets/logo.jpg" class="project-img" alt="ACP Protocol 🤝">
                 <div class="project-name">ACP Protocol 🤝 <span class="project-impact">State Layer</span></div>
-                
                 <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 跨 Session 或跨 Agent 時，任務狀態丟失導致記憶斷層。</div>
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 定義標準化狀態交換協議，將記憶解耦至外部檔案層。</div>
                     <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 實現零損失的任務移交，支持異構 Agent 之間的無縫協作。</div>
-                    <div class="project-tags">
-                        <span class="tag">JSON-Schema</span><span class="tag">Multi-Agent</span><span class="tag">State-Sync</span>
-                    </div>
+                    <div class="project-tags"><span class="tag">JSON-Schema</span><span class="tag">Multi-Agent</span><span class="tag">State-Sync</span></div>
                 </div>
-                
-                <div style="display: flex; gap: 10px; margin-top: auto;">
-                    <a href="projects/acp-protocol/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
-                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="projects/acp-protocol/index.html" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
                 </div>
             </div>
-
-            <!-- Project 4: Model Fallback -->
             <div class="project-card reveal">
-                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-model-fallback/main/assets/logo.jpg" class="project-img" alt="Model Fallback">
+                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-model-fallback/main/assets/logo.jpg" class="project-img" alt="Model Fallback 🛡️">
                 <div class="project-name">Model Fallback 🛡️ <span class="project-impact">Resilience</span></div>
-                
                 <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 單一模型供應商的 429/503 錯誤導致生產環境中斷。</div>
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 實作自動失效切換機制，在毫秒級時間內無縫切換備用模型。</div>
                     <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 將系統可用性提升至 99.9%，消除單點失效風險。</div>
-                    <div class="project-tags">
-                        <span class="tag">Error-Handling</span><span class="tag">Failover</span><span class="tag">LLMOps</span>
-                    </div>
+                    <div class="project-tags"><span class="tag">Error-Handling</span><span class="tag">Failover</span><span class="tag">LLMOps</span></div>
                 </div>
-                
-                <div style="display: flex; gap: 10px; margin-top: auto;">
-                    <a href="projects/model-fallback/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
-                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="projects/model-fallback/index.html" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
                 </div>
             </div>
-
-            <!-- Project 5: Core Flow -->
             <div class="project-card reveal">
-                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-core-flow/main/assets/banner.jpg" class="project-img" alt="Core Flow">
+                <img src="https://raw.githubusercontent.com/cheerhuan/hermes-core-flow/main/assets/banner.jpg" class="project-img" alt="Core Flow ⚙️">
                 <div class="project-name">Core Flow ⚙️ <span class="project-impact">Standardization</span></div>
-                
                 <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> Agent 開發缺乏標準，導致部署困難且安全邊界模糊。</div>
                     <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 整合 CaMeL 安全邊界與標準化部署模板，定義工業級流水線。</div>
-                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result</strong>: 極大縮短從開發到生產的週期，確保執行環境的絕對安全。</div>
-                    <div class="project-tags">
-                        <span class="tag">Docker</span><span class="tag">Security</span><span class="tag">CI/CD</span>
-                    </div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 極大縮短從開發到生產的週期，確保執行環境的絕對安全。</div>
+                    <div class="project-tags"><span class="tag">Docker</span><span class="tag">Security</span><span class="tag">CI/CD</span></div>
                 </div>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="projects/core-flow/index.html" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Value Layer 2: Solutions -->
+        <div class="value-section reveal value-layer-sol">
+            <div class="value-header sol">
+                <h3>High-Utility Solutions</h3>
+                <p>Turning advanced AI capabilities into specialized tools with measurable impact.</p>
+            </div>
+            <div class="bento-grid">
                 
-                <div style="display: flex; gap: 10px; margin-top: auto;">
-                    <a href="projects/core-flow/index.html" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study ↗</a>
-                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 10px; background: var(--accent-green); color: #000;">Consult ↗</a>
+            <div class="project-card reveal">
+                <img src="https://raw.githubusercontent.com/cheerhuan/opencli-skill-dev/main/assets/hero.jpg" class="project-img" alt="OpenCLI 🚀">
+                <div class="project-name">OpenCLI 🚀 <span class="project-impact">Web-to-CLI</span></div>
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> API 限制與動態網頁導致 Agent 無法有效操作 Web。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 構建介面適配層，將瀏覽器會話轉化為標準化 CLI 指令。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 成功繞過 300+ 網站限制，實現零 API 依賴的自動化。</div>
+                    <div class="project-tags"><span class="tag">Playwright</span><span class="tag">Firecrawl</span><span class="tag">Adaptive Parsing</span></div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="projects/opencli/index.html" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
                 </div>
             </div>
+            <div class="project-card reveal">
+                <img src="https://raw.githubusercontent.com/cheerhuan/save-your-token/main/crab.png" class="project-img" alt="Save Your Token 🦀">
+                <div class="project-name">Save Your Token 🦀 <span class="project-impact">Token Efficiency</span></div>
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 網頁雜訊導致 Token 浪費，增加成本並降低模型推理精度。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 實作「語義蒸餾」Pipeline，剔除冗餘內容並恢復結構。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 平均降低 60%+ Token 消耗，顯著提升長文本分析速度。</div>
+                    <div class="project-tags"><span class="tag">MarkItDown</span><span class="tag">Trafilatura</span><span class="tag">Markdown</span></div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="projects/save-your-token/index.html" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" class="project-img" alt="AI Quote Gen 📄">
+                <div class="project-name">AI Quote Gen 📄 <span class="project-impact">Business Auto</span></div>
+                <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Problem:</strong> 非結構化需求轉化為正式報價單過程低效且易出錯。</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--accent-cyan);">Solution:</strong> 利用 LLM 結構化提取 + Pydantic 強類型校驗 + 自動化 PDF 渲染。</div>
+                    <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Result:</strong> 實現從需求文字到專業報價單的秒級生成，確保財務數據 100% 正確。</div>
+                    <div class="project-tags"><span class="tag">Pydantic</span><span class="tag">DeepSeek</span><span class="tag">ReportLab</span></div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                    <a href="https://cheerhuan.github.io/ai-quote-tool/" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Case Study</a>
+                    <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Value Layer 3: Capabilities -->
+        <div class="value-section reveal value-layer-cap">
+            <div class="value-header cap">
+                <h3>Strategic Capabilities</h3>
+                <p>Architecture and consulting for the next generation of Agentic workflows.</p>
+            </div>
+            <div class="pill-list" style="justify-content: center; font-size: 1.1rem;">
+                <span class="pill" style="padding: 12px 24px; border-radius: 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Agentic Workflow Design</span>
+                <span class="pill" style="padding: 12px 24px; border-radius: 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Token Optimization Strategy</span>
+                <span class="pill" style="padding: 12px 24px; border-radius: 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Looming-horizon Orchestration</span>
+                <span class="pill" style="padding: 12px 24px; border-radius: 12px; border-color: var(--accent-purple); color: var(--accent-purple);">Multi-Agent Orchestration</span>
+            </div>
         </div>
     </section>
+
 
     <section class="section reveal" id="cta-middle">
         <div class="section-box" style="text-align: center; border: 1px solid var(--accent-purple); background: radial-gradient(circle at center, rgba(167, 139, 250, 0.1), transparent);">
@@ -557,37 +575,6 @@
         </div>
     </section>
 
-    <section class="section reveal" id="cta-middle">
-        <div class="section-box" style="text-align: center; border: 1px solid var(--accent-purple); background: radial-gradient(circle at center, rgba(167, 139, 250, 0.1), transparent);">
-            <div class="hero-badge" style="border-color: var(--accent-purple); color: var(--accent-purple);">Limited Availability: 3 Slots/Mo</div>
-            <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -0.04em;">Ready to Scale Your<br><span>AI Capabilities?</span></h2>
-            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem; line-height: 1.6;">
-                停止在不確定的 AI 嘗試中浪費時間。我協助您將構思轉化為工業級的穩定系統，從架構設計到生產部署，一次到位。
-            </p>
-            <div style="display: flex; justify-content: center; gap: 40px; text-align: left; margin-bottom: 40px; flex-wrap: wrap; max-width: 700px; margin-left: auto; margin-right: auto;">
-                <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; flex: 1; min-width: 200px;">
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                        <span style="color: var(--accent-green);">✓</span> 企業級 AI Agent 架構設計
-                    </li>
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                        <span style="color: var(--accent-green);">✓</span> 複雜自動化流程之落地實作
-                    </li>
-                </ul>
-                <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; flex: 1; min-width: 200px;">
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                        <span style="color: var(--accent-green);">✓</span> 高性能數據蒸餾與分析管線
-                    </li>
-                    <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                        <span style="color: var(--accent-green);">✓</span> 生產環境級的系統韌性構建
-                    </li>
-                </ul>
-            </div>
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="background: var(--accent-green); color: #000; font-weight: 800; padding: 16px 32px;">Book a Free Consultation ↗</a>
-                <a href="#works" class="btn-contact" style="background: transparent; color: var(--text-main); border: 1px solid var(--border); padding: 16px 32px;">View Case Studies ↗</a>
-            </div>
-        </div>
-    </section>
 
     <section class="section reveal" id="services">
         <div class="section-header">
