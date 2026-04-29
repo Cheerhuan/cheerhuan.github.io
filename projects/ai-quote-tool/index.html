@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Quote Gen | Stop Writing Quotes Manually</title>
+    <title>AI Quote Gen | 停止浪費時間手動撰寫報價單</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -23,7 +23,7 @@
             background-color: var(--bg); 
             background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 30, 0.8), var(--bg));
             color: var(--text-main); 
-            font-family: 'Outfit', sans-serif; 
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif; 
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -52,11 +52,12 @@
             padding: 120px 24px 60px; position: relative;
         }
         .hero-headline {
-            font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; line-height: 1.1;
+            font-size: clamp(2rem, 7vw, 4rem); font-weight: 800; line-height: 1.2;
             margin-bottom: 16px; letter-spacing: -0.04em; max-width: 900px;
         }
+        .hero-headline span { display: block; font-size: 0.6em; color: var(--accent-cyan); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
         .hero-sub {
-            font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted);
+            font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-muted);
             max-width: 650px; margin-bottom: 48px;
         }
 
@@ -73,7 +74,7 @@
         textarea {
             width: 100%; height: 180px; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
             border-radius: 16px; padding: 20px; color: var(--text-main);
-            font-family: 'JetBrains Mono', monospace; font-size: 1rem; resize: none;
+            font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif; font-size: 1rem; resize: none;
             margin-bottom: 24px; transition: 0.3s;
         }
         textarea:focus { outline: none; border-color: var(--accent-cyan); background: rgba(0,0,0,0.5); }
@@ -82,7 +83,7 @@
         .btn-generate {
             width: 100%; padding: 20px; border-radius: 16px; border: none;
             background: var(--accent-green); color: #000; font-weight: 800;
-            font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; cursor: pointer; 
+            font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif; font-size: 1.1rem; cursor: pointer; 
             transition: 0.3s; box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2);
         }
         .btn-generate:hover { transform: translateY(-3px); background: #5dfa9a; box-shadow: 0 15px 30px rgba(74, 222, 128, 0.4); }
@@ -90,7 +91,7 @@
         
         .microcopy { font-size: 0.85rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 
-        /* --- Results Area (Hidden by default) --- */
+        /* --- Results Area --- */
         #result-section {
             max-width: 800px; margin: 40px auto; padding: 0 24px; display: none;
             animation: fadeInUp 0.6s ease-out forwards;
@@ -99,7 +100,7 @@
 
         .mock-pdf {
             background: #fff; color: #333; border-radius: 12px; padding: 40px; 
-            font-family: 'serif'; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            font-family: 'serif', 'Noto Serif TC', serif; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
             position: relative; overflow: hidden;
         }
         .pdf-controls {
@@ -166,45 +167,48 @@
     <nav>
         <a href="../../index.html" class="logo">~/casper_hsieh</a>
         <div class="nav-links">
-            <a href="#how-it-works">How it Works</a>
-            <a href="#benefits">Benefits</a>
+            <a href="#how-it-works">運作原理 / How it Works</a>
+            <a href="#benefits">核心優勢 / Benefits</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1 class="hero-headline">Stop wasting hours writing quotes manually.</h1>
-        <p class="hero-sub">Paste your client requirements and get a professional quote in 30 seconds.</p>
+        <h1 class="hero-headline">
+            停止浪費數小時手動撰寫報價單。<br>
+            <span>Stop wasting hours writing quotes manually.</span>
+        </h1>
+        <p class="hero-sub">貼上客戶需求，30 秒內生成專業報價單。<br>Paste client requirements and get a professional quote in 30 seconds.</p>
         
         <div class="tool-container">
-            <textarea id="input" placeholder="e.g. I need a website with login, payment, and admin dashboard..."></textarea>
+            <textarea id="input" placeholder="例如：我需要一個包含登入、支付與管理後台的網站...&#10;e.g. I need a website with login, payment, and admin dashboard..."></textarea>
             <div class="cta-group">
-                <button class="btn-generate" id="gen-btn" onclick="generate()">Generate My Quote &rarr;</button>
-                <span class="microcopy">No signup required</span>
+                <button class="btn-generate" id="gen-btn" onclick="generate()">立即生成報價單 &rarr; <br><span style="font-size: 0.7em; font-weight: 400;">Generate My Quote</span></button>
+                <span class="microcopy">無需註冊 / No signup required</span>
             </div>
         </div>
     </section>
 
     <div id="result-section">
         <div class="pdf-controls">
-            <button class="btn-copy" onclick="copyResult()">Copy Content</button>
-            <button class="btn-copy" onclick="window.print()">Download PDF</button>
+            <button class="btn-copy" onclick="copyResult()">複製內容 / Copy</button>
+            <button class="btn-copy" onclick="window.print()">下載 PDF / Download</button>
         </div>
         <div class="mock-pdf">
             <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
-                <span style="font-weight: bold; font-size: 1.2rem;">QUOTATION</span>
-                <span style="font-size: 0.8rem;">Date: <span id="res-date"></span></span>
+                <span style="font-weight: bold; font-size: 1.2rem;">報價單 / QUOTATION</span>
+                <span style="font-size: 0.8rem;">日期 / Date: <span id="res-date"></span></span>
             </div>
             <div style="margin-bottom: 20px;">
-                <div style="font-weight: bold;">Bill To:</div>
-                <div id="res-customer">Detecting customer...</div>
+                <div style="font-weight: bold;">客戶 / Bill To:</div>
+                <div id="res-customer">正在識別客戶 / Detecting customer...</div>
             </div>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
                 <thead>
                     <tr style="border-bottom: 1px solid #ddd; text-align: left; font-size: 0.8rem;">
-                        <th>Description</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Total</th>
+                        <th>項目 / Description</th>
+                        <th>數量 / Qty</th>
+                        <th>單價 / Price</th>
+                        <th>小計 / Total</th>
                     </tr>
                 </thead>
                 <tbody id="res-items">
@@ -212,25 +216,25 @@
                 </tbody>
             </table>
             <div style="text-align: right; font-weight: bold; font-size: 1.1rem;">
-                Grand Total: $<span id="res-total">0.00</span>
+                總計 / Grand Total: $<span id="res-total">0.00</span>
             </div>
         </div>
     </div>
 
     <section class="section" id="demo">
         <div class="section-header">
-            <h2>From Chaos to Clarity</h2>
-            <p>Turn messy chat logs into a structured business document instantly.</p>
+            <h2>從混亂到清晰 / From Chaos to Clarity</h2>
+            <p>將凌亂的對話記錄瞬間轉化為結構化的商務文件。<br>Turn messy chat logs into structured business documents instantly.</p>
         </div>
         <div class="demo-box">
             <div class="demo-item">
-                <div class="demo-label">Before (Unstructured)</div>
+                <div class="demo-label">之前 (未結構化) / Before</div>
                 <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted);">
                     "Hey Casper, we need a landing page and maybe a blog. About 5 pages. Budget is around $2k. Need it by next month. Also a logo."
                 </p>
             </div>
             <div class="demo-item">
-                <div class="demo-label">After (AI Structured)</div>
+                <div class="demo-label">之後 (AI 結構化) / After</div>
                 <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-green);">
                     - Landing Page Design & Dev (1) ... $1,200<br>
                     - Blog Setup & Integration (1) ... $500<br>
@@ -243,61 +247,61 @@
 
     <section class="section" id="how-it-works">
         <div class="section-header">
-            <h2>How it Works</h2>
-            <p>Zero friction. Just pure automation.</p>
+            <h2>運作原理 / How it Works</h2>
+            <p>零摩擦，純自動化。 / Zero friction. Just pure automation.</p>
         </div>
         <div class="grid">
             <div class="card">
-                <h3>1. Paste</h3>
-                <p>Drop in your client emails, Slack messages, or rough notes.</p>
+                <h3>1. 貼上 / Paste</h3>
+                <p>直接貼上客戶郵件、Slack 訊息或粗略的筆記。<br>Drop in your client emails, Slack messages, or rough notes.</p>
             </div>
             <div class="card">
-                <h3>2. Extract</h3>
-                <p>AI identifies deliverables, quantities, and pricing logic.</p>
+                <h3>2. 提取 / Extract</h3>
+                <p>AI 自動識別交付項目、數量與定價邏輯。<br>AI identifies deliverables, quantities, and pricing logic.</p>
             </div>
             <div class="card">
-                <h3>3. Deliver</h3>
-                <p>Get a professional PDF-ready quote to send to your client.</p>
+                <h3>3. 交付 / Deliver</h3>
+                <p>獲得一份專業的 PDF 格式報價單直接發給客戶。<br>Get a professional PDF-ready quote to send to your client.</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="benefits">
         <div class="section-header">
-            <h2>Built for Solopreneurs</h2>
-            <p>Stop the administrative bleed. Focus on building.</p>
+            <h2>為獨立開發者設計 / Built for Solopreneurs</h2>
+            <p>停止在行政瑣事上浪費時間，專注於創造。<br>Stop the administrative bleed. Focus on building.</p>
         </div>
         <div class="grid">
             <div class="card">
-                <h3>Save Hours</h3>
-                <p>Reduce quote creation time from 60 minutes to 30 seconds.</p>
+                <h3>省下數小時 / Save Hours</h3>
+                <p>將報價單製作時間從 60 分鐘縮短至 30 秒。<br>Reduce quote creation time from 60 mins to 30 secs.</p>
             </div>
             <div class="card">
-                <h3>Eliminate Errors</h3>
-                <p>No more missed line items or calculation mistakes.</p>
+                <h3>消除錯誤 / Eliminate Errors</h3>
+                <p>不再遺漏項目或出現計算錯誤。<br>No more missed line items or calculation mistakes.</p>
             </div>
             <div class="card">
-                <h3>Look Professional</h3>
-                <p>Consistent, clean formatting that wins more high-ticket clients.</p>
+                <h3>提升專業感 / Look Professional</h3>
+                <p>一致且乾淨的排版，幫助您贏得更多高客單價客戶。<br>Consistent, clean formatting that wins high-ticket clients.</p>
             </div>
         </div>
     </section>
 
     <section class="final-cta">
-        <h2>Ready to automate your business?</h2>
-        <p style="color: var(--text-muted); margin-bottom: 40px;">Join hundreds of freelancers scaling their agency.</p>
-        <a href="#top" class="btn-generate" style="text-decoration: none; display: inline-block; width: auto; padding: 20px 48px;">Try it Now &rarr;</a>
+        <h2>準備好將業務自動化了嗎？<br><span>Ready to automate your business?</span></h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">加入數百名正在規模化代理機構的自由職業者。<br>Join freelancers scaling their agencies.</p>
+        <a href="#top" class="btn-generate" style="text-decoration: none; display: inline-block; width: auto; padding: 20px 48px;">立即嘗試 / Try it Now &rarr;</a>
     </section>
 
     <div class="loading-overlay" id="loader">
         <div class="spinner"></div>
-        <p id="loader-text" style="font-family: 'JetBrains Mono', monospace;">Analyzing requirements...</p>
+        <p id="loader-text" style="font-family: 'JetBrains Mono', monospace; text-align: center;">分析需求中...<br>Analyzing requirements...</p>
     </div>
 
     <script>
         function generate() {
             const input = document.getElementById('input').value;
-            if (!input) return alert('Please enter some requirements!');
+            if (!input) return alert('請輸入需求 / Please enter some requirements!');
             
             const btn = document.getElementById('gen-btn');
             const loader = document.getElementById('loader');
@@ -307,17 +311,16 @@
             btn.disabled = true;
             loader.style.display = 'flex';
             
-            // Sequential loading states for "Product Experience"
             const states = [
-                "Analyzing requirements...",
-                "Extracting deliverables...",
-                "Calculating totals...",
-                "Rendering professional quote..."
+                "分析需求中...<br>Analyzing requirements...",
+                "提取交付項目...<br>Extracting deliverables...",
+                "計算總金額...<br>Calculating totals...",
+                "渲染專業報價單...<br>Rendering professional quote..."
             ];
             
             let step = 0;
             const interval = setInterval(() => {
-                loaderText.innerText = states[step];
+                loaderText.innerHTML = states[step];
                 step++;
                 if (step >= states.length) clearInterval(interval);
             }, 600);
@@ -327,15 +330,12 @@
                 btn.disabled = false;
                 resultSection.style.display = 'block';
                 
-                // Set Date
                 document.getElementById('res-date').innerText = new Date().toISOString().split('T')[0];
-                
-                // Mocking Extraction
-                document.getElementById('res-customer').innerText = "Detected Client from Input";
+                document.getElementById('res-customer').innerText = "已識別客戶 / Detected Client from Input";
                 document.getElementById('res-total').innerText = "2,500.00";
                 document.getElementById('res-items').innerHTML = `
-                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">AI System Architecture</td><td>1</td><td>1,500</td><td>1,500</td></tr>
-                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">Frontend Implementation</td><td>1</td><td>1,000</td><td>1,000</td></tr>
+                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">AI 系統架構 / AI System Architecture</td><td>1</td><td>1,500</td><td>1,500</td></tr>
+                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">前端實作 / Frontend Implementation</td><td>1</td><td>1,000</td><td>1,000</td></tr>
                 `;
                 
                 resultSection.scrollIntoView({ behavior: 'smooth' });
@@ -345,7 +345,7 @@
         function copyResult() {
             const text = document.querySelector('.mock-pdf').innerText;
             navigator.clipboard.writeText(text);
-            alert('Quote content copied to clipboard!');
+            alert('報價內容已複製 / Quote content copied!');
         }
     </script>
 </body>
