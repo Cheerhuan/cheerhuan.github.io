@@ -577,10 +577,6 @@
                     ${f.name} (+$${f.price})
                 </label>
             `).join('');
-        }
-
-        function generate() {
-            const type = document.getElementById('project-type').value;
         function generate() {
             const mode = document.querySelector('.tab-btn.active').innerText.toLowerCase().includes('smart') ? 'smart' : 'custom';
             let finalItems = [];
@@ -636,7 +632,6 @@
                 btn.disabled = false;
                 resultSection.style.display = 'block';
                 
-                // 1. Market Indicator
                 const marketMin = basePrice * 0.7;
                 const marketMax = (basePrice + 2000) * 1.5;
                 document.getElementById('market-info').innerHTML = `
@@ -644,7 +639,6 @@
                     <span class="market-range">$${marketMin.toLocaleString()} - $${marketMax.toLocaleString()}</span>
                 `;
 
-                // 2. Tiers
                 const tiers = [
                     { name: 'Basic', price: total * 0.8, feat: ['基礎交付', '標準支持'], color: '' },
                     { name: 'Standard', price: total, feat: ['完整功能', '優先交付'], color: 'featured' },
@@ -658,7 +652,6 @@
                     </div>
                 `).join('');
 
-                // 3. Detailed PDF
                 document.getElementById('res-date').innerText = new Date().toISOString().split('T')[0];
                 document.getElementById('res-customer').innerText = mode === 'smart' ? "結構化定價 / Structured Pricing" : "自定義定價 / Custom Pricing";
                 document.getElementById('res-total').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -668,7 +661,6 @@
                 `).join('');
                 document.getElementById('res-items').innerHTML = itemsHtml;
 
-                // 4. Negotiation
                 const negs = [
                     { label: '太貴了 / Too Expensive', text: '我理解預算考量。我們可以討論縮減部分非核心功能來降低成本。' },
                     { label: '需要折扣 / Need Discount', text: '若能採取一次性全額預付，我可以提供 5% 的早鳥折扣。' },
