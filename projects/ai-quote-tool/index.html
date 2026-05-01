@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Quote Gen | 停止浪費時間手動撰寫報價單</title>
+    <title>Smart Quote Engine | 結構化定價系統</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -77,7 +77,20 @@
             font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif; font-size: 1rem; resize: none;
             margin-bottom: 24px; transition: 0.3s;
         }
-        textarea:focus { outline: none; border-color: var(--accent-cyan); background: rgba(0,0,0,0.5); }
+        /* --- Form Elements --- */
+        .form-group { margin-bottom: 24px; text-align: left; }
+        .form-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; }
+        select, input[type=\"number\"] {
+            width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px; color: var(--text-main);
+            font-family: 'Outfit', sans-serif; font-size: 1rem; transition: 0.3s;
+        }
+        select:focus, input:focus { outline: none; border-color: var(--accent-purple); }
+        
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 12px; border: 1px solid var(--border); }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+        .checkbox-item:hover { color: var(--accent-green); }
+        .checkbox-item input { accent-color: var(--accent-green); width: 16px; height: 16px; }
 
         .cta-group { display: flex; flex-direction: column; align-items: center; gap: 16px; }
         .btn-generate {
@@ -98,11 +111,32 @@
         }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .mock-pdf {
-            background: #fff; color: #333; border-radius: 12px; padding: 40px; 
-            font-family: 'serif', 'Noto Serif TC', serif; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            position: relative; overflow: hidden;
+        /* --- Pricing Tiers --- */
+        .tiers-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .tier-card { 
+            background: #fff; color: #333; border-radius: 12px; padding: 24px; 
+            border: 2px solid #eee; transition: 0.3s; display: flex; flex-direction: column;
         }
+        .tier-card.featured { border-color: var(--accent-green); transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .tier-name { font-weight: 800; font-size: 1.1rem; text-align: center; margin-bottom: 10px; }
+        .tier-price { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 20px; color: #000; }
+        .tier-features { font-size: 0.85rem; list-style: none; padding: 0; margin-bottom: 20px; flex-grow: 1; }
+        .tier-features li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .tier-features li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-green); font-weight: bold; }
+        
+        .market-indicator { 
+            background: rgba(167, 139, 250, 0.1); border: 1px solid var(--border); 
+            padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 30px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+        }
+        .market-range { color: var(--accent-cyan); font-weight: bold; }
+
+        .negotiation-box { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 30px; }
+        .btn-neg { 
+            background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);
+            padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.2s;
+        }
+        .btn-neg:hover { background: var(--accent-purple); color: #000; }
         .pdf-controls {
             display: flex; justify-content: flex-end; margin-bottom: 16px; gap: 12px;
         }
@@ -174,21 +208,59 @@
 
     <section class="hero">
         <h1 class="hero-headline">
-            停止浪費數小時手動撰寫報價單。<br>
-            <span>Stop wasting hours writing quotes manually.</span>
+            停止在報價單上猶豫不決。<br>
+            <span>Stop guessing. Start pricing with precision.</span>
         </h1>
         <p class="hero-sub">貼上客戶需求，30 秒內生成專業報價單。<br>Paste client requirements and get a professional quote in 30 seconds.</p>
         
         <div class="tool-container">
-            <textarea id="input" placeholder="例如：我需要一個包含登入、支付與管理後台的網站...&#10;e.g. I need a website with login, payment, and admin dashboard..."></textarea>
+            <div class="form-group">
+                <label class="form-label">專案類型 / Project Type</label>
+                <select id="project-type">
+                    <option value="landing">Landing Page (單頁落地頁)</option>
+                    <option value="corporate">Corporate Website (企業官網)</option>
+                    <option value="ecommerce">E-commerce (電商平台)</option>
+                    <option value="saas">SaaS Product (軟體服務)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">複雜程度 / Complexity</label>
+                <select id="complexity">
+                    <option value="1">Simple (基礎 / 快速交付)</option>
+                    <option value="1.5">Medium (標準 / 定製化)</option>
+                    <option value="2">Complex (高級 / 深度開發)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">預計頁數 / Estimated Pages</label>
+                <input type="number" id="page-count" value="1" min="1">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">功能模組 / Feature Modules</label>
+                <div class="checkbox-group" id="feature-list">
+                    <!-- Features injected by JS -->
+                </div>
+            </div>
+
             <div class="cta-group">
-                <button class="btn-generate" id="gen-btn" onclick="generate()">立即生成報價單 &rarr; <br><span style="font-size: 0.7em; font-weight: 400;">Generate My Quote</span></button>
-                <span class="microcopy">無需註冊 / No signup required</span>
+                <button class="btn-generate" id="gen-btn" onclick="generate()">立即計算報價 &rarr; <br><span style="font-size: 0.7em; font-weight: 400;">Calculate Quote</span></button>
+                <span class="microcopy">基於結構化規則 / Rule-based Precision</span>
             </div>
         </div>
     </section>
 
     <div id="result-section">
+        <div class="market-indicator" id="market-info">
+            <!-- Market range injected by JS -->
+        </div>
+
+        <div class="tiers-container" id="tiers-container">
+            <!-- Tiers injected by JS -->
+        </div>
+
         <div class="pdf-controls">
             <button class="btn-copy" onclick="copyResult()">複製內容 / Copy</button>
             <button class="btn-copy" onclick="window.print()">下載 PDF / Download</button>
@@ -218,6 +290,10 @@
             <div style="text-align: right; font-weight: bold; font-size: 1.1rem;">
                 總計 / Grand Total: $<span id="res-total">0.00</span>
             </div>
+        </div>
+
+        <div class="negotiation-box" id="neg-box">
+            <!-- Negotiation buttons injected by JS -->
         </div>
     </div>
 
@@ -299,10 +375,42 @@
     </div>
 
     <script>
+        const PRICING_RULES = {
+            basePrices: {
+                landing: 800,
+                corporate: 2000,
+                ecommerce: 4000,
+                saas: 6000
+            },
+            features: [
+                { id: 'auth', name: '用戶系統 / Auth', price: 600 },
+                { id: 'payment', name: '支付整合 / Payment', price: 1000 },
+                { id: 'admin', name: '管理後台 / Admin Panel', price: 1500 },
+                { id: 'blog', name: '部落格系統 / Blog', price: 500 },
+                { id: 'seo', name: 'SEO 優化 / SEO', price: 400 },
+                { id: 'multilang', name: '多國語言 / i18n', price: 800 }
+            ],
+            pageRate: 200
+        };
+
+        function initFeatures() {
+            const container = document.getElementById('feature-list');
+            container.innerHTML = PRICING_RULES.features.map(f => `
+                <label class="checkbox-item">
+                    <input type="checkbox" value="${f.id}" class="feature-checkbox">
+                    ${f.name} (+$${f.price})
+                </label>
+            `).join('');
+        }
+
         function generate() {
-            const input = document.getElementById('input').value;
-            if (!input) return alert('請輸入需求 / Please enter some requirements!');
+            const type = document.getElementById('project-type').value;
+            const complexity = parseFloat(document.getElementById('complexity').value);
+            const pages = parseInt(document.getElementById('page-count').value) || 1;
             
+            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
+
             const btn = document.getElementById('gen-btn');
             const loader = document.getElementById('loader');
             const loaderText = document.getElementById('loader-text');
@@ -312,10 +420,10 @@
             loader.style.display = 'flex';
             
             const states = [
-                "分析需求中...<br>Analyzing requirements...",
-                "提取交付項目...<br>Extracting deliverables...",
-                "計算總金額...<br>Calculating totals...",
-                "渲染專業報價單...<br>Rendering professional quote..."
+                "計算基礎價格...<br>Calculating base price...",
+                "分析模組成本...<br>Analyzing module costs...",
+                "套用複雜度係數...<br>Applying complexity multiplier...",
+                "生成多維報價方案...<br>Generating multi-tier options..."
             ];
             
             let step = 0;
@@ -323,23 +431,63 @@
                 loaderText.innerHTML = states[step];
                 step++;
                 if (step >= states.length) clearInterval(interval);
-            }, 600);
+            }, 500);
 
             setTimeout(() => {
                 loader.style.display = 'none';
                 btn.disabled = false;
                 resultSection.style.display = 'block';
                 
-                document.getElementById('res-date').innerText = new Date().toISOString().split('T')[0];
-                document.getElementById('res-customer').innerText = "已識別客戶 / Detected Client from Input";
-                document.getElementById('res-total').innerText = "2,500.00";
-                document.getElementById('res-items').innerHTML = `
-                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">AI 系統架構 / AI System Architecture</td><td>1</td><td>1,500</td><td>1,500</td></tr>
-                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">前端實作 / Frontend Implementation</td><td>1</td><td>1,000</td><td>1,000</td></tr>
+                const base = PRICING_RULES.basePrices[type];
+                const pageCost = (pages - 1) * PRICING_RULES.pageRate;
+                const featureCost = selectedFeatures.reduce((sum, f) => sum + f.price, 0);
+                const total = (base + pageCost + featureCost) * complexity;
+
+                // 1. Market Indicator
+                const marketMin = base * 0.7;
+                const marketMax = (base + 2000) * 1.5;
+                document.getElementById('market-info').innerHTML = `
+                    市場參考價格區間 / Market Price Range: 
+                    <span class="market-range">$${marketMin.toLocaleString()} - $${marketMax.toLocaleString()}</span>
                 `;
+
+                // 2. Tiers Generation
+                const tiers = [
+                    { name: 'Basic', price: total * 0.7, feat: ['基礎功能', '標準交付', 'Email 支援'], color: '' },
+                    { name: 'Standard', price: total, feat: ['完整選定功能', '優先交付', '1個月保固'], color: 'featured' },
+                    { name: 'Premium', price: total * 1.3, feat: ['全案優化', '極速交付', '年度維護計劃'], color: '' }
+                ];
+                document.getElementById('tiers-container').innerHTML = tiers.map(t => `
+                    <div class="tier-card ${t.color}">
+                        <div class="tier-name">${t.name}</div>
+                        <div class="tier-price">$${t.price.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                        <ul class="tier-features">${t.feat.map(f => `<li>${f}</li>`).join('')}</ul>
+                    </div>
+                `).join('');
+
+                // 3. Detailed PDF
+                document.getElementById('res-date').innerText = new Date().toISOString().split('T')[0];
+                document.getElementById('res-customer').innerText = "結構化定價 / Structured Pricing";
+                document.getElementById('res-total').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2});
                 
+                let itemsHtml = `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">${type.toUpperCase()} 基礎方案</td><td>1</td><td>${base}</td><td>${base}</td></tr>`;
+                if(pages > 1) itemsHtml += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">額外頁面 (${pages-1}頁)</td><td>${pages-1}</td><td>${PRICING_RULES.pageRate}</td><td>${pageCost}</td></tr>`;
+                selectedFeatures.forEach(f => itemsHtml += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">${f.name}</td><td>1</td><td>${f.price}</td><td>${f.price}</td></tr>`);
+                itemsHtml += `<tr style="font-weight: bold; border-top: 2px solid #000;"><td colspan="3" style="padding: 12px 0; text-align: right;">複雜度調整 (x${complexity})</td><td>${total.toFixed(2)}</td></tr>`;
+                document.getElementById('res-items').innerHTML = itemsHtml;
+
+                // 4. Negotiation Box
+                const negs = [
+                    { label: '太貴了 / Too Expensive', text: '我理解預算考量。我們可以討論縮減部分非核心功能（如 SEO 或 多國語言）來降低成本。' },
+                    { label: '需要折扣 / Need Discount', text: '若能採取一次性全額預付，我可以提供 5% 的早鳥折扣。' },
+                    { label: '縮減範圍 / Reduce Scope', text: '讓我們重新審視功能清單，將「必須有」與「有了更好」的功能分開，精簡開發規模。' }
+                ];
+                document.getElementById('neg-box').innerHTML = negs.map(n => `
+                    <button class="btn-neg" onclick="alert('${n.text}')">${n.label}</button>
+                `).join('');
+
                 resultSection.scrollIntoView({ behavior: 'smooth' });
-            }, 2500);
+            }, 2000);
         }
 
         function copyResult() {
