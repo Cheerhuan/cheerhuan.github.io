@@ -440,8 +440,7 @@
             pageRate: 200
         };
 
-        let currentQuote = []; 
-        let activeInput = null; // Track active input for suggestions
+        let activeInput = null;
 
         function switchMode(mode) {
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -528,55 +527,6 @@
             items.forEach(item => addCustomRow(item.name, item.price, item.qty));
         }
 
-
-            popover.innerHTML = matches.map(m => `
-                <div class="suggestion-item" onclick="applySuggestion('${m.name}', ${m.price}, this)">
-                    ${m.name} <span style="color: var(--accent-green); float: right;">$${m.price}</span>
-                </div>
-            `).join('');
-        }
-
-        function createSuggestionPopover() {
-            const pop = document.createElement('div');
-            pop.id = 'suggestion-popover';
-            pop.className = 'suggestion-popover';
-            document.body.appendChild(pop);
-            return pop;
-        }
-
-        function hideSuggestions() {
-            const pop = document.getElementById('suggestion-popover');
-            if (pop) pop.style.display = 'none';
-        }
-
-        function applySuggestion(name, price, el) {
-            const row = el.closest('.suggestion-item').closest('.suggestion-popover').previousElementSibling; 
-            // This is tricky because popover is appended to body. 
-            // I need a better way to track the active input.
-        }
-            const type = document.getElementById('project-type').value;
-            const base = PRICING_RULES.basePrices[type];
-            const pages = parseInt(document.getElementById('page-count').value) || 1;
-            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
-                .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
-
-            const items = [{ name: `${type.toUpperCase()} 基礎方案`, price: base, qty: 1 }];
-            if (pages > 1) items.push({ name: `額外頁面 (${pages-1}頁)`, price: PRICING_RULES.pageRate, qty: pages - 1 });
-            selectedFeatures.forEach(f => items.push({ name: f.name, price: f.price, qty: 1 }));
-
-            const container = document.getElementById('custom-items-container');
-            container.innerHTML = '';
-            items.forEach(item => addCustomRow(item.name, item.price, item.qty));
-        }
-
-        function initFeatures() {
-            const container = document.getElementById('feature-list');
-            container.innerHTML = PRICING_RULES.features.map(f => `
-                <label class="checkbox-item">
-                    <input type="checkbox" value="${f.id}" class="feature-checkbox">
-                    ${f.name} (+$${f.price})
-                </label>
-            `).join('');
         function generate() {
             const mode = document.querySelector('.tab-btn.active').innerText.toLowerCase().includes('smart') ? 'smart' : 'custom';
             let finalItems = [];
@@ -679,6 +629,18 @@
             navigator.clipboard.writeText(text);
             alert('報價內容已複製 / Quote content copied!');
         }
+
+        function initFeatures() {
+            const container = document.getElementById('feature-list');
+            container.innerHTML = PRICING_RULES.features.map(f => `
+                <label class="checkbox-item">
+                    <input type="checkbox" value="${f.id}" class="feature-checkbox">
+                    ${f.name} (+$${f.price})
+                </label>
+            `).join('');
+        }
+
+        window.onload = initFeatures;
     </script>
 </body>
 </html>
