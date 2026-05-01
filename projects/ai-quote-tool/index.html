@@ -77,20 +77,33 @@
             font-family: 'JetBrains Mono', 'Noto Sans TC', sans-serif; font-size: 1rem; resize: none;
             margin-bottom: 24px; transition: 0.3s;
         }
-        /* --- Form Elements --- */
-        .form-group { margin-bottom: 24px; text-align: left; }
-        .form-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; }
-        select, input[type=\"number\"] {
-            width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
-            border-radius: 12px; padding: 12px; color: var(--text-main);
-            font-family: 'Outfit', sans-serif; font-size: 1rem; transition: 0.3s;
+        .goal-section { margin-bottom: 32px; text-align: center; }
+        .goal-input-wrapper { position: relative; margin-bottom: 20px; }
+        .goal-input { 
+            width: 100%; padding: 20px; background: rgba(0,0,0,0.5); border: 2px solid var(--border); 
+            border-radius: 16px; color: var(--text-main); font-size: 1.1rem; font-family: 'Outfit', sans-serif;
+            transition: 0.3s; text-align: center;
         }
-        select:focus, input:focus { outline: none; border-color: var(--accent-purple); }
+        .goal-input:focus { outline: none; border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(167, 139, 250, 0.2); }
         
-        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 12px; border: 1px solid var(--border); }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-        .checkbox-item:hover { color: var(--accent-green); }
-        .checkbox-item input { accent-color: var(--accent-green); width: 16px; height: 16px; }
+        .goal-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 32px; }
+        .goal-pill { 
+            padding: 8px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); 
+            border-radius: 100px; color: var(--text-muted); font-size: 0.85rem; cursor: pointer; 
+            transition: 0.3s; font-family: 'JetBrains Mono', monospace;
+        }
+        .goal-pill:hover { background: var(--accent-purple); color: #fff; border-color: var(--accent-purple); }
+        
+        .suggestion-badge { 
+            display: inline-block; padding: 2px 8px; background: var(--accent-purple); 
+            color: #fff; border-radius: 4px; font-size: 0.7rem; margin-left: 8px; 
+            vertical-align: middle; font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .refine-section { 
+            border-top: 1px solid var(--border); padding-top: 24px; margin-top: 24px;
+            animation: fadeIn 0.5s ease;
+        }
 
         .cta-group { display: flex; flex-direction: column; align-items: center; gap: 16px; }
         .btn-generate {
@@ -249,37 +262,53 @@
                 <button class="tab-btn" onclick="switchMode('custom')">自定義模式 / Custom</button>
             </div>
 
-            <div id="mode-smart" class="mode-panel active">
-                <div class="form-group">
-                    <label class="form-label">專案類型 / Project Type</label>
-                    <select id="project-type">
-                        <option value="landing">Landing Page (單頁落地頁)</option>
-                        <option value="corporate">Corporate Website (企業官網)</option>
-                        <option value="ecommerce">E-commerce (電商平台)</option>
-                        <option value="saas">SaaS Product (軟體服務)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">複雜程度 / Complexity</label>
-                    <select id="complexity">
-                        <option value="1">Simple (基礎 / 快速交付)</option>
-                        <option value="1.5">Medium (標準 / 定製化)</option>
-                        <option value="2">Complex (高級 / 深度開發)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">預計頁數 / Estimated Pages</label>
-                    <input type="number" id="page-count" value="1" min="1">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">功能模組 / Feature Modules</label>
-                    <div class="checkbox-group" id="feature-list">
-                        <!-- Features injected by JS -->
+                        <div id="mode-smart" class="mode-panel active">
+                <div class="goal-section">
+                    <div class="goal-input-wrapper">
+                        <input type="text" id="goal-input" class="goal-input" placeholder="我想建立一個... / I want to create a..." oninput="inferStructure(this.value)">
+                    </div>
+                    <div class="goal-pills" id="goal-pills">
+                        <div class="goal-pill" onclick="setGoal('Sell products online')">Sell products online</div>
+                        <div class="goal-pill" onclick="setGoal('Build a company website')">Build a company website</div>
+                        <div class="goal-pill" onclick="setGoal('Create an app')">Create an app</div>
+                        <div class="goal-pill" onclick="setGoal('Design a brand')">Design a brand</div>
+                        <div class="goal-pill" onclick="setGoal('')">Other / 其他</div>
                     </div>
                 </div>
+
+                <div id="refine-section" class="refine-section" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">建議專案類型 / Suggested Type <span id="type-badge" class="suggestion-badge">AI Suggested</span></label>
+                        <select id="project-type">
+                            <option value="landing">Landing Page (單頁落地頁)</option>
+                            <option value="corporate">Corporate Website (企業官網)</option>
+                            <option value="ecommerce">E-commerce (電商平台)</option>
+                            <option value="saas">SaaS Product (軟體服務)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">複雜程度 / Complexity</label>
+                        <select id="complexity">
+                            <option value="1">Simple (基礎 / 快速交付)</option>
+                            <option value="1.5">Medium (標準 / 定製化)</option>
+                            <option value="2">Complex (高級 / 深度開發)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">預計頁數 / Estimated Pages</label>
+                        <input type="number" id="page-count" value="1" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">建議功能模組 / Suggested Features</label>
+                        <div class="checkbox-group" id="feature-list">
+                            <!-- Features injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
 
             <div id="mode-custom" class="mode-panel">
@@ -440,7 +469,53 @@
             pageRate: 200
         };
 
+        const GOAL_MAPPING = {
+            'Sell products online': { type: 'ecommerce', features: ['payment', 'auth', 'admin'] },
+            'Build a company website': { type: 'corporate', features: ['blog', 'seo'] },
+            'Create an app': { type: 'saas', features: ['auth', 'payment', 'admin'] },
+            'Design a brand': { type: 'landing', features: ['seo'] }
+        };
+
         let activeInput = null;
+
+        function setGoal(goal) {
+            const input = document.getElementById('goal-input');
+            input.value = goal;
+            inferStructure(goal);
+        }
+
+        function inferStructure(text) {
+            const val = text.toLowerCase();
+            const refineSection = document.getElementById('refine-section');
+            if (!val) { refineSection.style.display = 'none'; return; }
+            
+            refineSection.style.display = 'block';
+            
+            let suggestedType = 'landing';
+            if (val.includes('shop') || val.includes('store') || val.includes('sell') || val.includes('ecommerce')) suggestedType = 'ecommerce';
+            else if (val.includes('app') || val.includes('saas') || val.includes('software')) suggestedType = 'saas';
+            else if (val.includes('company') || val.includes('corporate') || val.includes('business')) suggestedType = 'corporate';
+            
+            document.getElementById('project-type').value = suggestedType;
+
+            const checkboxes = document.querySelectorAll('.feature-checkbox');
+            checkboxes.forEach(cb => {
+                const feature = PRICING_RULES.features.find(f => f.id === cb.value);
+                if (feature && (val.includes(feature.name.toLowerCase()) || val.includes(feature.id))) {
+                    cb.checked = true;
+                }
+            });
+
+            for (const [goal, mapping] of Object.entries(GOAL_MAPPING)) {
+                if (text === goal) {
+                    document.getElementById('project-type').value = mapping.type;
+                    checkboxes.forEach(cb => {
+                        cb.checked = mapping.features.includes(cb.value);
+                    });
+                    break;
+                }
+            }
+        }
 
         function switchMode(mode) {
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -592,7 +667,7 @@
                 const tiers = [
                     { name: 'Basic', price: total * 0.8, feat: ['基礎交付', '標準支持'], color: '' },
                     { name: 'Standard', price: total, feat: ['完整功能', '優先交付'], color: 'featured' },
-                    { name: 'Premium', price: total * 1.2, feat: ['全案優化', '年度維護'], color: '' }
+                    { name: 'Premium', price: total * 1.2, feat: ['全案優化', '年度維護'], color: '' },
                 ];
                 document.getElementById('tiers-container').innerHTML = tiers.map(t => `
                     <div class="tier-card ${t.color}">
@@ -641,6 +716,6 @@
         }
 
         window.onload = initFeatures;
-    </script>
+</script>
 </body>
 </html>
