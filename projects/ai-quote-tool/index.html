@@ -136,7 +136,37 @@
             background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);
             padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.2s;
         }
-        .btn-neg:hover { background: var(--accent-purple); color: #000; }
+        /* --- Tab System --- */
+        .tab-switcher { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 16px; border: 1px solid var(--border); }
+        .tab-btn { 
+            flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; 
+            color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; 
+            cursor: pointer; transition: 0.3s; 
+        }
+        .tab-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+        
+        .mode-panel { display: none; animation: fadeIn 0.3s ease; }
+        .mode-panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Custom Mode Elements --- */
+        .custom-item-row { display: grid; grid-template-columns: 2fr 1fr 1fr 40px; gap: 10px; margin-bottom: 12px; align-items: center; }
+        .btn-remove { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; width: 32px; height: 32px; cursor: pointer; transition: 0.2s; }
+        .btn-remove:hover { background: #ef4444; color: #fff; }
+        .btn-add { 
+            width: 100%; padding: 12px; background: transparent; border: 1px dashed var(--border); 
+            color: var(--text-muted); border-radius: 12px; cursor: pointer; transition: 0.3s; 
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-bottom: 24px;
+        }
+        .btn-add:hover { border-color: var(--accent-green); color: var(--accent-green); }
+        
+        .suggestion-popover { 
+            position: absolute; background: var(--card-bg); border: 1px solid var(--accent-purple); 
+            border-radius: 8px; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
+            font-size: 0.8rem; overflow: hidden;
+        }
+        .suggestion-item { padding: 8px 12px; cursor: pointer; transition: 0.2s; border-bottom: 1px solid var(--border); }
+        .suggestion-item:hover { background: rgba(167, 139, 250, 0.2); color: var(--accent-cyan); }
         .pdf-controls {
             display: flex; justify-content: flex-end; margin-bottom: 16px; gap: 12px;
         }
@@ -214,34 +244,51 @@
         <p class="hero-sub">貼上客戶需求，30 秒內生成專業報價單。<br>Paste client requirements and get a professional quote in 30 seconds.</p>
         
         <div class="tool-container">
-            <div class="form-group">
-                <label class="form-label">專案類型 / Project Type</label>
-                <select id="project-type">
-                    <option value="landing">Landing Page (單頁落地頁)</option>
-                    <option value="corporate">Corporate Website (企業官網)</option>
-                    <option value="ecommerce">E-commerce (電商平台)</option>
-                    <option value="saas">SaaS Product (軟體服務)</option>
-                </select>
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="switchMode('smart')">智能模式 / Smart</button>
+                <button class="tab-btn" onclick="switchMode('custom')">自定義模式 / Custom</button>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">複雜程度 / Complexity</label>
-                <select id="complexity">
-                    <option value="1">Simple (基礎 / 快速交付)</option>
-                    <option value="1.5">Medium (標準 / 定製化)</option>
-                    <option value="2">Complex (高級 / 深度開發)</option>
-                </select>
+            <div id="mode-smart" class="mode-panel active">
+                <div class="form-group">
+                    <label class="form-label">專案類型 / Project Type</label>
+                    <select id="project-type">
+                        <option value="landing">Landing Page (單頁落地頁)</option>
+                        <option value="corporate">Corporate Website (企業官網)</option>
+                        <option value="ecommerce">E-commerce (電商平台)</option>
+                        <option value="saas">SaaS Product (軟體服務)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">複雜程度 / Complexity</label>
+                    <select id="complexity">
+                        <option value="1">Simple (基礎 / 快速交付)</option>
+                        <option value="1.5">Medium (標準 / 定製化)</option>
+                        <option value="2">Complex (高級 / 深度開發)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">預計頁數 / Estimated Pages</label>
+                    <input type="number" id="page-count" value="1" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">功能模組 / Feature Modules</label>
+                    <div class="checkbox-group" id="feature-list">
+                        <!-- Features injected by JS -->
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">預計頁數 / Estimated Pages</label>
-                <input type="number" id="page-count" value="1" min="1">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">功能模組 / Feature Modules</label>
-                <div class="checkbox-group" id="feature-list">
-                    <!-- Features injected by JS -->
+            <div id="mode-custom" class="mode-panel">
+                <div class="form-group">
+                    <label class="form-label">項目明細 / Line Items</label>
+                    <div id="custom-items-container">
+                        <!-- Custom rows injected by JS -->
+                    </div>
+                    <button class="btn-add" onclick="addCustomRow()">+ 新增項目 / Add Item</button>
                 </div>
             </div>
 
@@ -393,6 +440,135 @@
             pageRate: 200
         };
 
+        let currentQuote = []; 
+        let activeInput = null; // Track active input for suggestions
+
+        function switchMode(mode) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.toLowerCase().includes(mode));
+            });
+            document.querySelectorAll('.mode-panel').forEach(panel => {
+                panel.classList.toggle('active', panel.id === `mode-${mode}`);
+            });
+            if (mode === 'custom') syncSmartToCustom();
+        }
+
+        function addCustomRow(name = '', price = '', qty = 1) {
+            const container = document.getElementById('custom-items-container');
+            const row = document.createElement('div');
+            row.className = 'custom-item-row';
+            row.innerHTML = `
+                <input type="text" placeholder="項目名稱 / Item Name" class="custom-name" value="${name}" oninput="handleSuggestion(event)">
+                <input type="number" placeholder="單價 / Price" class="custom-price" value="${price}">
+                <input type="number" placeholder="數量 / Qty" class="custom-qty" value="${qty}">
+                <button class="btn-remove" onclick="this.parentElement.remove()">×</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function handleSuggestion(e) {
+            activeInput = e.target;
+            const val = activeInput.value.toLowerCase();
+            if (!val) { hideSuggestions(); return; }
+
+            const matches = PRICING_RULES.features.filter(f => 
+                f.name.toLowerCase().includes(val)
+            );
+
+            if (matches.length === 0) { hideSuggestions(); return; }
+
+            const popover = document.getElementById('suggestion-popover') || createSuggestionPopover();
+            const rect = activeInput.getBoundingClientRect();
+            popover.style.top = `${rect.bottom + window.scrollY}px`;
+            popover.style.left = `${rect.left + window.scrollX}px`;
+            popover.style.display = 'block';
+
+            popover.innerHTML = matches.map(m => `
+                <div class="suggestion-item" onclick="applySuggestion('${m.name}', ${m.price})">
+                    ${m.name} <span style="color: var(--accent-green); float: right;">$${m.price}</span>
+                </div>
+            `).join('');
+        }
+
+        function applySuggestion(name, price) {
+            if (activeInput) {
+                activeInput.value = name;
+                const row = activeInput.parentElement;
+                row.querySelector('.custom-price').value = price;
+            }
+            hideSuggestions();
+        }
+
+        function createSuggestionPopover() {
+            const pop = document.createElement('div');
+            pop.id = 'suggestion-popover';
+            pop.className = 'suggestion-popover';
+            document.body.appendChild(pop);
+            return pop;
+        }
+
+        function hideSuggestions() {
+            const pop = document.getElementById('suggestion-popover');
+            if (pop) pop.style.display = 'none';
+        }
+
+        function syncSmartToCustom() {
+            const type = document.getElementById('project-type').value;
+            const base = PRICING_RULES.basePrices[type];
+            const pages = parseInt(document.getElementById('page-count').value) || 1;
+            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
+
+            const items = [{ name: `${type.toUpperCase()} 基礎方案`, price: base, qty: 1 }];
+            if (pages > 1) items.push({ name: `額外頁面 (${pages-1}頁)`, price: PRICING_RULES.pageRate, qty: pages - 1 });
+            selectedFeatures.forEach(f => items.push({ name: f.name, price: f.price, qty: 1 }));
+
+            const container = document.getElementById('custom-items-container');
+            container.innerHTML = '';
+            items.forEach(item => addCustomRow(item.name, item.price, item.qty));
+        }
+
+
+            popover.innerHTML = matches.map(m => `
+                <div class="suggestion-item" onclick="applySuggestion('${m.name}', ${m.price}, this)">
+                    ${m.name} <span style="color: var(--accent-green); float: right;">$${m.price}</span>
+                </div>
+            `).join('');
+        }
+
+        function createSuggestionPopover() {
+            const pop = document.createElement('div');
+            pop.id = 'suggestion-popover';
+            pop.className = 'suggestion-popover';
+            document.body.appendChild(pop);
+            return pop;
+        }
+
+        function hideSuggestions() {
+            const pop = document.getElementById('suggestion-popover');
+            if (pop) pop.style.display = 'none';
+        }
+
+        function applySuggestion(name, price, el) {
+            const row = el.closest('.suggestion-item').closest('.suggestion-popover').previousElementSibling; 
+            // This is tricky because popover is appended to body. 
+            // I need a better way to track the active input.
+        }
+            const type = document.getElementById('project-type').value;
+            const base = PRICING_RULES.basePrices[type];
+            const pages = parseInt(document.getElementById('page-count').value) || 1;
+            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
+
+            const items = [{ name: `${type.toUpperCase()} 基礎方案`, price: base, qty: 1 }];
+            if (pages > 1) items.push({ name: `額外頁面 (${pages-1}頁)`, price: PRICING_RULES.pageRate, qty: pages - 1 });
+            selectedFeatures.forEach(f => items.push({ name: f.name, price: f.price, qty: 1 }));
+
+            const container = document.getElementById('custom-items-container');
+            container.innerHTML = '';
+            items.forEach(item => addCustomRow(item.name, item.price, item.qty));
+        }
+
         function initFeatures() {
             const container = document.getElementById('feature-list');
             container.innerHTML = PRICING_RULES.features.map(f => `
@@ -405,11 +581,39 @@
 
         function generate() {
             const type = document.getElementById('project-type').value;
-            const complexity = parseFloat(document.getElementById('complexity').value);
-            const pages = parseInt(document.getElementById('page-count').value) || 1;
-            
-            const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
-                .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
+        function generate() {
+            const mode = document.querySelector('.tab-btn.active').innerText.toLowerCase().includes('smart') ? 'smart' : 'custom';
+            let finalItems = [];
+            let total = 0;
+            let basePrice = 0;
+
+            if (mode === 'smart') {
+                const type = document.getElementById('project-type').value;
+                const complexity = parseFloat(document.getElementById('complexity').value);
+                const pages = parseInt(document.getElementById('page-count').value) || 1;
+                const selectedFeatures = Array.from(document.querySelectorAll('.feature-checkbox:checked'))
+                    .map(cb => PRICING_RULES.features.find(f => f.id === cb.value));
+
+                basePrice = PRICING_RULES.basePrices[type];
+                const pageCost = (pages - 1) * PRICING_RULES.pageRate;
+                const featureCost = selectedFeatures.reduce((sum, f) => sum + f.price, 0);
+                
+                finalItems = [{ name: `${type.toUpperCase()} 基礎方案`, price: basePrice, qty: 1 }];
+                if (pages > 1) finalItems.push({ name: `額外頁面 (${pages-1}頁)`, price: PRICING_RULES.pageRate, qty: pages - 1 });
+                selectedFeatures.forEach(f => finalItems.push({ name: f.name, price: f.price, qty: 1 }));
+                
+                total = (basePrice + pageCost + featureCost) * complexity;
+            } else {
+                const rows = document.querySelectorAll('.custom-item-row');
+                rows.forEach(row => {
+                    const name = row.querySelector('.custom-name').value;
+                    const price = parseFloat(row.querySelector('.custom-price').value) || 0;
+                    const qty = parseInt(row.querySelector('.custom-qty').value) || 0;
+                    if (name) finalItems.push({ name, price, qty });
+                });
+                total = finalItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                basePrice = finalItems[0] ? finalItems[0].price : 0;
+            }
 
             const btn = document.getElementById('gen-btn');
             const loader = document.getElementById('loader');
@@ -419,43 +623,32 @@
             btn.disabled = true;
             loader.style.display = 'flex';
             
-            const states = [
-                "計算基礎價格...<br>Calculating base price...",
-                "分析模組成本...<br>Analyzing module costs...",
-                "套用複雜度係數...<br>Applying complexity multiplier...",
-                "生成多維報價方案...<br>Generating multi-tier options..."
-            ];
-            
+            const states = ["分析項目明細...", "校驗價格邏輯...", "生成權威報價單..."];
             let step = 0;
             const interval = setInterval(() => {
                 loaderText.innerHTML = states[step];
                 step++;
                 if (step >= states.length) clearInterval(interval);
-            }, 500);
+            }, 400);
 
             setTimeout(() => {
                 loader.style.display = 'none';
                 btn.disabled = false;
                 resultSection.style.display = 'block';
                 
-                const base = PRICING_RULES.basePrices[type];
-                const pageCost = (pages - 1) * PRICING_RULES.pageRate;
-                const featureCost = selectedFeatures.reduce((sum, f) => sum + f.price, 0);
-                const total = (base + pageCost + featureCost) * complexity;
-
                 // 1. Market Indicator
-                const marketMin = base * 0.7;
-                const marketMax = (base + 2000) * 1.5;
+                const marketMin = basePrice * 0.7;
+                const marketMax = (basePrice + 2000) * 1.5;
                 document.getElementById('market-info').innerHTML = `
                     市場參考價格區間 / Market Price Range: 
                     <span class="market-range">$${marketMin.toLocaleString()} - $${marketMax.toLocaleString()}</span>
                 `;
 
-                // 2. Tiers Generation
+                // 2. Tiers
                 const tiers = [
-                    { name: 'Basic', price: total * 0.7, feat: ['基礎功能', '標準交付', 'Email 支援'], color: '' },
-                    { name: 'Standard', price: total, feat: ['完整選定功能', '優先交付', '1個月保固'], color: 'featured' },
-                    { name: 'Premium', price: total * 1.3, feat: ['全案優化', '極速交付', '年度維護計劃'], color: '' }
+                    { name: 'Basic', price: total * 0.8, feat: ['基礎交付', '標準支持'], color: '' },
+                    { name: 'Standard', price: total, feat: ['完整功能', '優先交付'], color: 'featured' },
+                    { name: 'Premium', price: total * 1.2, feat: ['全案優化', '年度維護'], color: '' }
                 ];
                 document.getElementById('tiers-container').innerHTML = tiers.map(t => `
                     <div class="tier-card ${t.color}">
@@ -467,27 +660,26 @@
 
                 // 3. Detailed PDF
                 document.getElementById('res-date').innerText = new Date().toISOString().split('T')[0];
-                document.getElementById('res-customer').innerText = "結構化定價 / Structured Pricing";
+                document.getElementById('res-customer').innerText = mode === 'smart' ? "結構化定價 / Structured Pricing" : "自定義定價 / Custom Pricing";
                 document.getElementById('res-total').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2});
                 
-                let itemsHtml = `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">${type.toUpperCase()} 基礎方案</td><td>1</td><td>${base}</td><td>${base}</td></tr>`;
-                if(pages > 1) itemsHtml += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">額外頁面 (${pages-1}頁)</td><td>${pages-1}</td><td>${PRICING_RULES.pageRate}</td><td>${pageCost}</td></tr>`;
-                selectedFeatures.forEach(f => itemsHtml += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">${f.name}</td><td>1</td><td>${f.price}</td><td>${f.price}</td></tr>`);
-                itemsHtml += `<tr style="font-weight: bold; border-top: 2px solid #000;"><td colspan="3" style="padding: 12px 0; text-align: right;">複雜度調整 (x${complexity})</td><td>${total.toFixed(2)}</td></tr>`;
+                let itemsHtml = finalItems.map(item => `
+                    <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px 0;">${item.name}</td><td>${item.qty}</td><td>${item.price}</td><td>${(item.price * item.qty).toFixed(2)}</td></tr>
+                `).join('');
                 document.getElementById('res-items').innerHTML = itemsHtml;
 
-                // 4. Negotiation Box
+                // 4. Negotiation
                 const negs = [
-                    { label: '太貴了 / Too Expensive', text: '我理解預算考量。我們可以討論縮減部分非核心功能（如 SEO 或 多國語言）來降低成本。' },
+                    { label: '太貴了 / Too Expensive', text: '我理解預算考量。我們可以討論縮減部分非核心功能來降低成本。' },
                     { label: '需要折扣 / Need Discount', text: '若能採取一次性全額預付，我可以提供 5% 的早鳥折扣。' },
-                    { label: '縮減範圍 / Reduce Scope', text: '讓我們重新審視功能清單，將「必須有」與「有了更好」的功能分開，精簡開發規模。' }
+                    { label: '縮減範圍 / Reduce Scope', text: '讓我們重新審視功能清單，將「必須有」與「有了更好」的功能分開。' }
                 ];
                 document.getElementById('neg-box').innerHTML = negs.map(n => `
                     <button class="btn-neg" onclick="alert('${n.text}')">${n.label}</button>
                 `).join('');
 
                 resultSection.scrollIntoView({ behavior: 'smooth' });
-            }, 2000);
+            }, 1200);
         }
 
         function copyResult() {
