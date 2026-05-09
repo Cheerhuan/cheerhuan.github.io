@@ -170,6 +170,18 @@
             display: flex;
             flex-direction: column;
         }
+        .project-card.featured-product {
+            grid-column: span 2;
+            border-color: var(--accent-purple);
+            background: linear-gradient(135deg, rgba(30, 30, 45, 0.8), rgba(20, 20, 30, 0.6));
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.1);
+        }
+        @media (max-width: 768px) {
+            .project-card.featured-product {
+                grid-column: span 1;
+            }
+        }
+
         .project-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-purple);
@@ -420,6 +432,30 @@
         <div class="section-header reveal">
             <h2>Featured Works</h2>
             <p>High-impact AI infrastructure designed for scalability and resilience.</p>
+        </div>
+
+        <!-- Value Layer 0: AI-Native Products (The Flagship) -->
+        <div class="value-section reveal value-layer-cap">
+            <div class="value-header cap">
+                <h3>AI-Native Products</h3>
+                <p>Turning system architecture into high-conversion digital assets.</p>
+            </div>
+            <div class="bento-grid">
+                <a href="https://cheerhuan.github.io/prompt-gallery-saas/" class="project-card reveal featured-product">
+                    <img src="https://cheerhuan.github.io/prompt-gallery-saas/images/uploads/img_1074cf679bc9.jpg" class="project-img" alt="Prompt Gallery SaaS">
+                    <div class="project-name">Prompt Gallery SaaS 🎨 <span class="project-impact">Flagship Product</span></div>
+                    <div style="margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6;">
+                        <div style="margin-bottom: 8px;"><strong style="color: var(--accent-purple);">Vision:</strong> 終結 AI 創作的「試錯循環」，將不確定性的 Prompt 轉化為確定性的視覺資產。</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: var(--accent-purple);">Architecture:</strong> 構建基於 SSG 的工業級策展系統，實現從 Prompt 到物理 HTML 的 100% 確定性交付。</div>
+                        <div style="margin-bottom: 12px;"><strong style="color: var(--accent-green);">Impact:</strong> 建立 AI 視覺交付的工業標準，消除本地錯覺，確保生產環境的絕對一致。</div>
+                        <div class="project-tags"><span class="tag">Next.js</span><span class="tag">GitHub Actions</span><span class="tag">SSG</span><span class="tag">Curation System</span></div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: auto; justify-content: center;">
+                        <a href="https://cheerhuan.github.io/prompt-gallery-saas/" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);">Visit Live Site ↗</a>
+                        <a href="mailto:cheerhuan@gmail.com" class="btn-contact" style="flex: 0 1 auto; text-align: center; font-size: 0.8rem; padding: 6px 12px; background: var(--accent-green); color: #000;">Consult</a>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <!-- Value Layer 1: Infrastructure -->
